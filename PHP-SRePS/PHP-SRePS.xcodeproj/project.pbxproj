@@ -15,8 +15,8 @@
 		33046CCB1D63131800CEEDAA /* PHP_SRePSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CCA1D63131800CEEDAA /* PHP_SRePSUITests.swift */; };
 		33046CDB1D63154F00CEEDAA /* SalesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */; };
 		33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */; };
-		33046CDF1D63177900CEEDAA /* SaleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDE1D63177900CEEDAA /* SaleProduct.swift */; };
-		33046CE11D63189400CEEDAA /* SaleTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE01D63189400CEEDAA /* SaleTransaction.swift */; };
+		33046CDF1D63177900CEEDAA /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDE1D63177900CEEDAA /* Product.swift */; };
+		33046CE11D63189400CEEDAA /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE01D63189400CEEDAA /* Transaction.swift */; };
 		33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */; };
 		33046CE51D6329F000CEEDAA /* AddTransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */; };
 		33046CE71D632A2400CEEDAA /* ProductsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */; };
@@ -56,8 +56,8 @@
 		33046CCC1D63131800CEEDAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesTableViewController.swift; sourceTree = "<group>"; };
 		33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesDataSource.swift; sourceTree = "<group>"; };
-		33046CDE1D63177900CEEDAA /* SaleProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleProduct.swift; sourceTree = "<group>"; };
-		33046CE01D63189400CEEDAA /* SaleTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaleTransaction.swift; sourceTree = "<group>"; };
+		33046CDE1D63177900CEEDAA /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		33046CE01D63189400CEEDAA /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductTableViewController.swift; sourceTree = "<group>"; };
 		33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransactionTableViewController.swift; sourceTree = "<group>"; };
 		33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListTableViewController.swift; sourceTree = "<group>"; };
@@ -127,11 +127,10 @@
 				33046CA81D63131800CEEDAA /* AppDelegate.swift */,
 				33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */,
 				33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */,
-				33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */,
-				33046CDE1D63177900CEEDAA /* SaleProduct.swift */,
-				33046CE01D63189400CEEDAA /* SaleTransaction.swift */,
 				33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */,
 				33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */,
+				33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */,
+				338E6FDF1D632F89009C42E5 /* Data */,
 				33046CAE1D63131800CEEDAA /* Main.storyboard */,
 				33046CB11D63131800CEEDAA /* Assets.xcassets */,
 				33046CB31D63131800CEEDAA /* LaunchScreen.storyboard */,
@@ -156,6 +155,15 @@
 				33046CCC1D63131800CEEDAA /* Info.plist */,
 			);
 			path = "PHP-SRePSUITests";
+			sourceTree = "<group>";
+		};
+		338E6FDF1D632F89009C42E5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				33046CDE1D63177900CEEDAA /* Product.swift */,
+				33046CE01D63189400CEEDAA /* Transaction.swift */,
+			);
+			name = Data;
 			sourceTree = "<group>";
 		};
 		F96E74EF2E40891C4C54B5C0 /* Pods */ = {
@@ -353,8 +361,8 @@
 				33046CDB1D63154F00CEEDAA /* SalesTableViewController.swift in Sources */,
 				33046CE51D6329F000CEEDAA /* AddTransactionTableViewController.swift in Sources */,
 				33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */,
-				33046CE11D63189400CEEDAA /* SaleTransaction.swift in Sources */,
-				33046CDF1D63177900CEEDAA /* SaleProduct.swift in Sources */,
+				33046CE11D63189400CEEDAA /* Transaction.swift in Sources */,
+				33046CDF1D63177900CEEDAA /* Product.swift in Sources */,
 				33046CA91D63131800CEEDAA /* AppDelegate.swift in Sources */,
 				33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */,
 				33046CE71D632A2400CEEDAA /* ProductsListTableViewController.swift in Sources */,

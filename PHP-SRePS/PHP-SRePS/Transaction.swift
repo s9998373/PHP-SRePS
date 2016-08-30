@@ -1,5 +1,5 @@
 //
-//  SaleTransaction.swift
+//  Transaction.swift
 //  PHP-SRePS
 //
 //  Created by Terry Lewis on 16/08/2016.
@@ -9,18 +9,18 @@
 import UIKit
 import RealmSwift
 
-class SaleTransaction: Object {
+class Transaction: Object {
     dynamic var name = ""
     dynamic var picture: NSData? = nil // optionals supported
-    let items = List<SaleProduct>()
+    let items = List<Product>()
     
     
     
-    func addProduct(product: SaleProduct){
+    func addProduct(product: Product){
         items.append(product)
     }
     
-    func removeProduct(product: SaleProduct){
+    func removeProduct(product: Product){
         items.delete(product)
     }
 

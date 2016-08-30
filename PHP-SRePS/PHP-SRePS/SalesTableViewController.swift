@@ -26,10 +26,9 @@ class SalesTableViewController: UITableViewController {
     
     func addSaleItem(){
         print("Adding a new item.");
-        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddProductTableViewController") as! AddProductTableViewController
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddTransactionTableViewController") as! AddTransactionTableViewController;
         let nav = UINavigationController.init(rootViewController: controller);
         self.presentViewController(nav, animated: true, completion: nil);
-        
     }
 
     override func didReceiveMemoryWarning() {

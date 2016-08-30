@@ -86,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="360"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Add Product-->
         <scene sceneID="8Sj-qZ-Nsk">
             <objects>
                 <tableViewController storyboardIdentifier="AddProductTableViewController" id="01X-bU-3cL" customClass="AddProductTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
@@ -165,16 +165,20 @@
                             <outlet property="delegate" destination="01X-bU-3cL" id="Sbc-w7-ae6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="2xn-1m-gDl"/>
+                    <navigationItem key="navigationItem" title="Add Product" id="2xn-1m-gDl"/>
+                    <connections>
+                        <outlet property="productNameTextField" destination="KUp-Cy-WBB" id="yVg-Po-lZH"/>
+                        <outlet property="productPriceTextField" destination="bLO-mR-BCf" id="hOV-Hs-UaD"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wz3-EN-SUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2239" y="647"/>
         </scene>
-        <!--Root View Controller-->
+        <!--New Transaction-->
         <scene sceneID="Nbd-4g-4a9">
             <objects>
-                <tableViewController id="p3T-1U-E62" customClass="AddTransactionTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddTransactionTableViewController" id="p3T-1U-E62" customClass="AddTransactionTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yjM-gf-tVg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,39 +198,11 @@
                             <outlet property="delegate" destination="p3T-1U-E62" id="1pJ-Uo-TyI"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Ho5-TI-lXy"/>
+                    <navigationItem key="navigationItem" title="New Transaction" id="Ho5-TI-lXy"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Znu-sX-p4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2191" y="1452"/>
-        </scene>
-        <!--Products List Table View Controller-->
-        <scene sceneID="GpC-UC-gmZ">
-            <objects>
-                <tableViewController id="RQk-ue-PFy" customClass="ProductsListTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ces-zV-4U2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FHs-rG-Lu2">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FHs-rG-Lu2" id="gJO-K7-Rft">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="RQk-ue-PFy" id="6UD-Nb-1tb"/>
-                            <outlet property="delegate" destination="RQk-ue-PFy" id="Qin-E5-J3z"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Cp-bA-FNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3255" y="1484"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0nN-qN-n5w">

@@ -12,12 +12,26 @@ class AddTransactionTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let addProductButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(AddTransactionTableViewController.addProduct));
+        self.navigationItem.rightBarButtonItem = addProductButton;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func addProduct(){
+        let controller = ProductsListTableViewController.init();
+        controller.storyboardReference = self.storyboard;
+        controller.delegate = self;
+        self.navigationController?.pushViewController(controller, animated: true);
+    }
+    
+    func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){
+        print("Selected ", selectedQuantity, " of ", selectedProduct.name, ".");
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,4 +106,11 @@ class AddTransactionTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension AddTransactionTableViewController : ProductsListTableViewControllerDelegate{
+    func didSelectProduct(sender: ProductsListTableViewController, product: Product, selectedQuantity: Int) {
+        sender.navigationController?.popViewControllerAnimated(true);
+        handleSelectedProduct(product, selectedQuantity: selectedQuantity);
+    }
 }
