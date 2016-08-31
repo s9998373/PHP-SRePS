@@ -11,17 +11,28 @@ import RealmSwift
 
 class Transaction: Object {
     dynamic var name = ""
-    dynamic var picture: NSData? = nil // optionals supported
-    let items = List<Product>()
+    let items = List<SalesEntry>()
     
     
     
-    func addProduct(product: Product){
-        items.append(product)
+    func addSalesEntry(salesEntry: SalesEntry, qty: Int){
+        
+        items.append(salesEntry)
     }
     
-    func removeProduct(product: Product){
-        items.delete(product)
+    func removeSalesEntry(salesEntry: SalesEntry, qty: Int){
+        items.delete(salesEntry)
+    }
+    
+    func updateSalesEntry(salesEntry: SalesEntry, qty: Int){
+        let idx = items.indexOf(salesEntry);
+        if idx == NSNotFound {
+            // Couldn't find.
+            print("Unable to find entry.");
+            return;
+        }
+        
+        items.replace(idx!, object: salesEntry);
     }
 
 }

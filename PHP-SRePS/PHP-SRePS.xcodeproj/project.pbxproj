@@ -21,6 +21,7 @@
 		33046CE51D6329F000CEEDAA /* AddTransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */; };
 		33046CE71D632A2400CEEDAA /* ProductsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */; };
 		8324F355778A5474B2680FD9 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF1AA79E58D531513AA8863 /* Pods.framework */; };
+		BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB813F91D6D4304007F46F5 /* SalesEntry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListTableViewController.swift; sourceTree = "<group>"; };
 		5C3E7B928CA9893ED471C32C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AFF1AA79E58D531513AA8863 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB813F91D6D4304007F46F5 /* SalesEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				33046CDE1D63177900CEEDAA /* Product.swift */,
 				33046CE01D63189400CEEDAA /* Transaction.swift */,
+				BFB813F91D6D4304007F46F5 /* SalesEntry.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */,
 				33046CE11D63189400CEEDAA /* Transaction.swift in Sources */,
 				33046CDF1D63177900CEEDAA /* Product.swift in Sources */,
+				BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */,
 				33046CA91D63131800CEEDAA /* AppDelegate.swift in Sources */,
 				33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */,
 				33046CE71D632A2400CEEDAA /* ProductsListTableViewController.swift in Sources */,
@@ -510,6 +514,7 @@
 			baseConfigurationReference = 5C3E7B928CA9893ED471C32C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "PHP-SRePS/Info.plist";
@@ -518,6 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -526,6 +532,7 @@
 			baseConfigurationReference = 16198FFAEFE5CEC24DF33C6F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "PHP-SRePS/Info.plist";
