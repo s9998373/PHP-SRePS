@@ -13,8 +13,6 @@ class Transaction: Object {
     dynamic var name = ""
     let items = List<SalesEntry>()
     
-    
-    
     func addSalesEntry(salesEntry: SalesEntry, qty: Int){
         
         items.append(salesEntry)

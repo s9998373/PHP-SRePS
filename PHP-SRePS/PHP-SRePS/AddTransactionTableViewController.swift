@@ -15,6 +15,8 @@ class AddTransactionTableViewController: UITableViewController {
         
         let addProductButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(AddTransactionTableViewController.addProduct));
         self.navigationItem.rightBarButtonItem = addProductButton;
+        
+        self.setToolbarItems([addProductButton], animated: false);
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
