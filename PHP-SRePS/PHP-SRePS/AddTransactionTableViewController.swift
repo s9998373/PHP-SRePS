@@ -9,14 +9,24 @@
 import UIKit
 
 class AddTransactionTableViewController: UITableViewController {
+    
+    var currentTransaction : Transaction!;
+    let kCellIdentifier = "SalesEntryCellIdentifier";
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let cancelButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(AddTransactionTableViewController.dismiss));
+        let doneButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Done, target: self, action: #selector(AddTransactionTableViewController.doneAction));
+        let flexibleSpaceItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil);
         let addProductButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(AddTransactionTableViewController.addProduct));
-        self.navigationItem.rightBarButtonItem = addProductButton;
+        self.navigationItem.rightBarButtonItem = doneButton;
+        self.navigationItem.leftBarButtonItem = cancelButton;
         
-        self.setToolbarItems([addProductButton], animated: false);
+        self.navigationController?.setToolbarHidden(false, animated: false)
+        let buttons = [flexibleSpaceItem, addProductButton, flexibleSpaceItem];
+        self.setToolbarItems(buttons, animated: true);
+        self.toolbarItems = buttons;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,15 +35,64 @@ class AddTransactionTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func reloadData(){
+//        self.tableView.reloadData()
+        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
+    }
+    
     func addProduct(){
         let controller = ProductsListTableViewController.init();
         controller.storyboardReference = self.storyboard;
         controller.delegate = self;
-        self.navigationController?.pushViewController(controller, animated: true);
+        let nav = UINavigationController.init(rootViewController: controller);
+//        self.navigationController?.pushViewController(controller, animated: true);
+        self.presentViewController(nav, animated: true, completion: nil);
+    }
+    
+    func dismiss(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func doneAction(){
+        self.dismiss()
+        SalesDataSource.sharedManager.addTransaction(currentTransaction)
     }
     
     func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){
         print("Selected ", selectedQuantity, " of ", selectedProduct.name, ".");
+        if (currentTransaction == nil) {
+            currentTransaction = Transaction();
+        }
+        
+        let salesEntry = SalesEntry();
+        salesEntry.product = selectedProduct
+        salesEntry.quantity = selectedQuantity
+        
+        if (currentTransaction.doesProductExistInTransaction(selectedProduct)){
+            handleDuplicateSalesEntry(salesEntry)
+        }else{
+            handleAdditionalSalesEntry(salesEntry)
+        }
+        
+    }
+    
+    func handleDuplicateSalesEntry(salesEntry : SalesEntry){
+        
+        let alert = UIAlertController.init(title: "Information", message: "A sales entry for this product already exists. Do you wish to summate the existing and new quantities?", preferredStyle: UIAlertControllerStyle.Alert);
+        alert.addAction(UIAlertAction.init(title: "Summate", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) in
+            self.currentTransaction.mergeSalesEntry(salesEntry);
+            self.reloadData()
+        }));
+        alert.addAction(UIAlertAction.init(title: "Replace", style: UIAlertActionStyle.Cancel, handler: { (action: UIAlertAction) in
+            self.currentTransaction.removeSalesEntry(salesEntry)
+            self.handleAdditionalSalesEntry(salesEntry)
+        }));
+        self.presentViewController(alert, animated: true, completion: nil);
+    }
+    
+    func handleAdditionalSalesEntry(salesEntry : SalesEntry){
+        currentTransaction.addSalesEntry(salesEntry)
+        self.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,23 +104,34 @@ class AddTransactionTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if (currentTransaction == nil) {
+            return 0
+        }
+        return currentTransaction.numberOfItems()
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell?
+        if (cell == nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: kCellIdentifier)
+            //            cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
+        }
 
         // Configure the cell...
+        
+        let currentItem = currentTransaction.salesEntryAtIndex(indexPath.row)
+        cell!.textLabel?.text = currentItem.product!.name
+        cell!.detailTextLabel!.text = String(currentItem.quantity)
 
-        return cell
+        return cell!
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -112,7 +182,8 @@ class AddTransactionTableViewController: UITableViewController {
 
 extension AddTransactionTableViewController : ProductsListTableViewControllerDelegate{
     func didSelectProduct(sender: ProductsListTableViewController, product: Product, selectedQuantity: Int) {
-        sender.navigationController?.popViewControllerAnimated(true);
+//        sender.navigationController?.popViewControllerAnimated(true);
+        sender.dismissViewControllerAnimated(true, completion: nil);
         handleSelectedProduct(product, selectedQuantity: selectedQuantity);
     }
 }

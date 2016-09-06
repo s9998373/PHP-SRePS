@@ -27,12 +27,13 @@ class ProductsListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let cancelButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(ProductsListTableViewController.dismiss));
         let addButton = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(ProductsListTableViewController.addNewProduct));
         self.navigationItem.rightBarButtonItem = addButton;
+        self.navigationItem.leftBarButtonItem = cancelButton
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
-        
-        productList = SalesDataSource.sharedManager.allProducts();
+//        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
+        self.reloadData();
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,10 +42,20 @@ class ProductsListTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func reloadData(){
+        productList = SalesDataSource.sharedManager.allProducts();
+        self.tableView.reloadData();
+    }
+    
     func addNewProduct(){
         let controller = self.storyboardReference!.instantiateViewControllerWithIdentifier("AddProductTableViewController") as! AddProductTableViewController
+        controller.delegate = self;
         let nav = UINavigationController.init(rootViewController: controller);
         self.presentViewController(nav, animated: true, completion: nil);
+    }
+    
+    func dismiss(){
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,19 +72,27 @@ class ProductsListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return productList.count
+        if (productList != nil) {
+            return productList.count;
+        }
+        return 0;
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier, forIndexPath: indexPath)
-        
+//        var cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)
+        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell?
+        if (cell == nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: kCellIdentifier)
+//            cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
+        }
         // Configure the cell...
         
-        let product = productList[indexPath.row];
-        cell.textLabel?.text = product.name;
-        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator;
+        let product = productList[indexPath.row] as! Product;
+        cell!.textLabel?.text = product.name;
+        cell!.detailTextLabel?.text = product.localisedPrice();
+        cell!.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator;
         
-        return cell
+        return cell!
     }
     
     /*
@@ -157,5 +176,11 @@ extension ProductsListTableViewController : UITextFieldDelegate{
         } else {
             return true
         }
+    }
+}
+
+extension ProductsListTableViewController : AddProductTableViewControllerDelegate{
+    func didAddProduct(sender: AddProductTableViewController, product: Product) {
+        self.reloadData();
     }
 }

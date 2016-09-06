@@ -50,7 +50,9 @@ class SalesDataSource: NSObject {
     }
     
     func allTransactions() -> NSArray{
-        return realm.objects(Transaction).toNSArray();
+        var result = realm.objects(Transaction).toNSArray();
+        print(result)
+        return result;
     }
     
     func removeTransaction(item: Transaction) -> Bool{
@@ -58,10 +60,36 @@ class SalesDataSource: NSObject {
     }
     
     private func abstractAdd(item: Object) -> Bool{
-        realm.beginWrite();
-        realm.add(item);
+//        var ret: Bool!
+//        SalesDataSource.safeWriteBlock { (result) in
+//            self.realm.add(item);
+//            ret = result
+//            print("ADDED")
+//        }
+        SalesDataSource.openWrite();
+        self.realm.add(item);
+        return SalesDataSource.closeWrite();
+    }
+    
+    private func abstractDelete(item: Object) -> Bool{
+//        var ret: Bool!
+//        SalesDataSource.safeWriteBlock { (result) in
+        
+        SalesDataSource.openWrite();
+        self.realm.delete(item);
+//            ret = result
+//        }
+//    return ret
+        return SalesDataSource.closeWrite();
+    }
+
+    class func openWrite(){
+        sharedManager.realm.beginWrite();
+    }
+    
+    class func closeWrite() -> Bool{
         do{
-            try realm.commitWrite();
+            try sharedManager.realm.commitWrite();
         }
         catch{
             return false;
@@ -69,16 +97,8 @@ class SalesDataSource: NSObject {
         return true;
     }
     
-    private func abstractDelete(item: Object) -> Bool{
-        realm.beginWrite();
-        realm.delete(item);
-        do{
-            try realm.commitWrite();
-        }
-        catch{
-            return false;
-        }
-        
-        return true;
-    }
+//    class func safeWriteBlock(completion: (result: Bool) -> Void){
+//        SalesDataSource.openWrite()
+//        completion(result: SalesDataSource.closeWrite());
+//    }
 }

@@ -9,12 +9,17 @@
 import UIKit
 
 class SalesTableViewController: UITableViewController {
-
+    var transactionList: NSArray!;
+    let kCellIdentifier = "TransactionCellIdentifier";
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(SalesTableViewController.addSaleItem));
         self.navigationItem.rightBarButtonItem = addButtonItem;
+        
+        transactionList = SalesDataSource.sharedManager.allTransactions()
+        self.tableView.reloadData()
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -40,23 +45,30 @@ class SalesTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        if ((transactionList == nil)) {
+            return 0
+        }
+        return transactionList.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+        var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell?
+        if (cell == nil) {
+            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: kCellIdentifier)
+            //            cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
+        }
+        
+        cell?.textLabel?.text = "Transaction"
 
-        // Configure the cell...
-
-        return cell
+        return cell!
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

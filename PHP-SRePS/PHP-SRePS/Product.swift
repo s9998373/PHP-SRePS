@@ -19,4 +19,25 @@ class Product: Object {
         self.name = aName;
         self.price = aPrice;
     }
+    
+    static let formatter = NSNumberFormatter()
+    
+    func localisedPrice() -> String{
+        let decimal = NSDecimalNumber.init(string: price) as NSDecimalNumber
+        return numberFormatter().stringFromNumber(decimal)!
+    }
+    
+    func numberFormatter() -> NSNumberFormatter{
+        struct Singleton {
+            static let instance = NSNumberFormatter()
+            static let initialised = false;
+        }
+        
+        if (!Singleton.initialised) {
+            Singleton.instance.numberStyle = .CurrencyStyle
+            Singleton.instance.locale = NSLocale.systemLocale()
+        }
+        
+        return Singleton.instance
+    }
 }

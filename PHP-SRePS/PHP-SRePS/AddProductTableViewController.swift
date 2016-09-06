@@ -8,7 +8,12 @@
 
 import UIKit
 
+protocol AddProductTableViewControllerDelegate: class {
+    func didAddProduct(sender: AddProductTableViewController, product: Product)
+}
+
 class AddProductTableViewController: UITableViewController {
+    weak var delegate: AddProductTableViewControllerDelegate!;
     @IBOutlet weak var productNameTextField: UITextField!
     @IBOutlet weak var productPriceTextField: UITextField!
     override func viewDidLoad() {
@@ -43,6 +48,7 @@ class AddProductTableViewController: UITableViewController {
         if SalesDataSource.sharedManager.addSalesProduct(newProduct){
             //success
             self.dismissController();
+            self.delegate.didAddProduct(self, product: newProduct)
         }else{
             //failure, show a message
         }
