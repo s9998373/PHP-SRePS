@@ -25,6 +25,7 @@ extension RealmSwift.List {
 
 class SalesDataSource: NSObject {
     static let sharedManager = SalesDataSource();
+    
     var realm: Realm!;
     
     override init() {
@@ -50,7 +51,7 @@ class SalesDataSource: NSObject {
     }
     
     func allTransactions() -> NSArray{
-        var result = realm.objects(Transaction).toNSArray();
+        let result = realm.objects(Transaction).toNSArray();
         print(result)
         return result;
     }
@@ -60,26 +61,14 @@ class SalesDataSource: NSObject {
     }
     
     private func abstractAdd(item: Object) -> Bool{
-//        var ret: Bool!
-//        SalesDataSource.safeWriteBlock { (result) in
-//            self.realm.add(item);
-//            ret = result
-//            print("ADDED")
-//        }
         SalesDataSource.openWrite();
         self.realm.add(item);
         return SalesDataSource.closeWrite();
     }
     
     private func abstractDelete(item: Object) -> Bool{
-//        var ret: Bool!
-//        SalesDataSource.safeWriteBlock { (result) in
-        
         SalesDataSource.openWrite();
         self.realm.delete(item);
-//            ret = result
-//        }
-//    return ret
         return SalesDataSource.closeWrite();
     }
 
@@ -96,9 +85,4 @@ class SalesDataSource: NSObject {
         }
         return true;
     }
-    
-//    class func safeWriteBlock(completion: (result: Bool) -> Void){
-//        SalesDataSource.openWrite()
-//        completion(result: SalesDataSource.closeWrite());
-//    }
 }

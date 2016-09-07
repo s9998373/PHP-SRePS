@@ -12,7 +12,7 @@ import Realm
 
 class Product: Object {
     dynamic var name = ""
-    dynamic var price = ""
+    dynamic var price:String? = "0"
     
     convenience init(aName: String, aPrice: String){
         self.init();
@@ -34,7 +34,7 @@ class Product: Object {
         }
         
         if (!Singleton.initialised) {
-            Singleton.instance.numberStyle = .CurrencyStyle
+            Singleton.instance.numberStyle = .CurrencyAccountingStyle
             Singleton.instance.locale = NSLocale.systemLocale()
         }
         

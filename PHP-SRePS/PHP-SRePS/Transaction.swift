@@ -12,6 +12,8 @@ import RealmSwift
 class Transaction: Object {
     dynamic var name = ""
     let items = List<SalesEntry>()
+    dynamic var date:NSDate? = nil
+    dynamic var totalCost:String? = nil
     
     func addSalesEntry(salesEntry: SalesEntry){
 //        SalesDataSource.safeWriteBlock { (result) in
@@ -76,6 +78,14 @@ class Transaction: Object {
     
     func numberOfItems() -> Int{
         return items.count
+    }
+    
+    func calculateTotal(){
+        var total = NSDecimalNumber.init(long: 0)
+        for entry in items{
+            total = total.decimalNumberByAdding(entry.decimalCost())
+        }
+        totalCost = total.stringValue
     }
 
 }
