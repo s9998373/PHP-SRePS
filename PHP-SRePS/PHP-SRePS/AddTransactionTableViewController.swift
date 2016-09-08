@@ -54,8 +54,10 @@ class AddTransactionTableViewController: UITableViewController {
     }
     
     func doneAction(){
+        if (currentTransaction != nil && currentTransaction.numberOfItems() > 0) {
+            SalesDataSource.sharedManager.addTransaction(currentTransaction)
+        }
         self.dismiss()
-        SalesDataSource.sharedManager.addTransaction(currentTransaction)
     }
     
     func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){

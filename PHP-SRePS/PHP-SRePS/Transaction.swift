@@ -77,7 +77,7 @@ class Transaction: Object {
     }
     
     func numberOfItems() -> Int{
-        return items.count
+        return self.items.count
     }
     
     func calculateTotal(){
