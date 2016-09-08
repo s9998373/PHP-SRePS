@@ -63,7 +63,7 @@ class AddTransactionTableViewController: UITableViewController {
     func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){
         print("Selected ", selectedQuantity, " of ", selectedProduct.name, ".");
         if (currentTransaction == nil) {
-            currentTransaction = Transaction();
+            currentTransaction = Transaction(date: NSDate());
         }
         
         let salesEntry = SalesEntry();

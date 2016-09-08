@@ -15,6 +15,11 @@ class Transaction: Object {
     dynamic var date:NSDate? = nil
     dynamic var totalCost:String? = nil
     
+    convenience init(date: NSDate) {
+        self.init()
+        self.date = date;
+    }
+    
     func addSalesEntry(salesEntry: SalesEntry){
 //        SalesDataSource.safeWriteBlock { (result) in
         SalesDataSource.openWrite()
