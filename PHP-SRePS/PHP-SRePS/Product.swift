@@ -35,7 +35,7 @@ class Product: Object {
         
         if (!Singleton.initialised) {
             Singleton.instance.numberStyle = .CurrencyAccountingStyle
-            Singleton.instance.locale = NSLocale.systemLocale()
+            Singleton.instance.locale = NSLocale.currentLocale()
         }
         
         return Singleton.instance
