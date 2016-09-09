@@ -37,8 +37,8 @@ class Transaction: Object {
         struct constant{
             static let pluralProduct = "products"
             static let pluralItem = "items"
-            static let singleProduct = "products"
-            static let singleItem = "items"
+            static let singleProduct = "product"
+            static let singleItem = "item"
         }
         
         var productString:String, itemString:String
@@ -48,12 +48,12 @@ class Transaction: Object {
             itemString = constant.pluralItem
         }
         if (numberOfItemTypes == 1) {
-            productString = constant.singleItem
+            productString = constant.singleProduct
         }else{
-            productString = constant.pluralItem
+            productString = constant.pluralProduct
         }
         
-        let result = "\(numberOfItemTypes) \(productString), \(numberOfItems). \(itemString)"
+        let result = "\(numberOfItemTypes) \(productString), \(numberOfItems) \(itemString)."
         
         return result
     }
