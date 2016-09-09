@@ -1,5 +1,5 @@
 //
-//  SalesTableViewController.swift
+//  TransactionsTableViewController.swift
 //  PHP-SRePS
 //
 //  Created by Terry Lewis on 16/08/2016.
@@ -8,19 +8,17 @@
 
 import UIKit
 
-class SalesTableViewController: UITableViewController {
+class TransactionsTableViewController: UITableViewController {
     var transactionList: NSArray!;
     let kCellIdentifier = "TransactionCellIdentifier";
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(SalesTableViewController.addSaleItem));
+        let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TransactionsTableViewController.addSaleItem));
         self.navigationItem.rightBarButtonItem = addButtonItem;
         
-        transactionList = SalesDataSource.sharedManager.allTransactions()
-        self.tableView.reloadData()
-        
+        refreshData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,9 +27,15 @@ class SalesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    func refreshData(){
+        transactionList = SalesDataSource.sharedManager.allTransactions()
+        self.tableView.reloadData()
+    }
+    
     func addSaleItem(){
         print("Adding a new item.");
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddTransactionTableViewController") as! AddTransactionTableViewController;
+        controller.delegate = self
         let nav = UINavigationController.init(rootViewController: controller);
         self.presentViewController(nav, animated: true, completion: nil);
     }
@@ -60,11 +64,14 @@ class SalesTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell?
         if (cell == nil) {
-            cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: kCellIdentifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
             //            cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
         }
         
-        cell?.textLabel?.text = "Transaction"
+        let transaction:Transaction = transactionList[indexPath.row] as! Transaction
+        
+        cell?.textLabel?.text = transaction.dateString()
+        cell?.detailTextLabel!.text = transaction.descriptiveString()
 
         return cell!
     }
@@ -115,4 +122,14 @@ class SalesTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension TransactionsTableViewController : AddTransactionTableViewControllerDelegate{
+    func didAddTransaction(sender: AddTransactionTableViewController, transaction: Transaction?) {
+        if (transaction != nil && transaction!.numberOfItems() > 0) {
+            SalesDataSource.sharedManager.addTransaction(transaction!)
+            refreshData()
+        }
+        sender.dismissViewControllerAnimated(true, completion: nil);
+    }
 }

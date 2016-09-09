@@ -13,7 +13,7 @@
 		33046CB51D63131800CEEDAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33046CB31D63131800CEEDAA /* LaunchScreen.storyboard */; };
 		33046CC01D63131800CEEDAA /* PHP_SRePSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CBF1D63131800CEEDAA /* PHP_SRePSTests.swift */; };
 		33046CCB1D63131800CEEDAA /* PHP_SRePSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CCA1D63131800CEEDAA /* PHP_SRePSUITests.swift */; };
-		33046CDB1D63154F00CEEDAA /* SalesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */; };
+		33046CDB1D63154F00CEEDAA /* TransactionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDA1D63154F00CEEDAA /* TransactionsTableViewController.swift */; };
 		33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */; };
 		33046CDF1D63177900CEEDAA /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CDE1D63177900CEEDAA /* Product.swift */; };
 		33046CE11D63189400CEEDAA /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE01D63189400CEEDAA /* Transaction.swift */; };
@@ -74,7 +74,7 @@
 		33046CC61D63131800CEEDAA /* PHP-SRePSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PHP-SRePSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33046CCA1D63131800CEEDAA /* PHP_SRePSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHP_SRePSUITests.swift; sourceTree = "<group>"; };
 		33046CCC1D63131800CEEDAA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesTableViewController.swift; sourceTree = "<group>"; };
+		33046CDA1D63154F00CEEDAA /* TransactionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsTableViewController.swift; sourceTree = "<group>"; };
 		33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesDataSource.swift; sourceTree = "<group>"; };
 		33046CDE1D63177900CEEDAA /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		33046CE01D63189400CEEDAA /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -149,9 +149,9 @@
 			isa = PBXGroup;
 			children = (
 				33046CA81D63131800CEEDAA /* AppDelegate.swift */,
-				33046CDA1D63154F00CEEDAA /* SalesTableViewController.swift */,
-				33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */,
+				33046CDA1D63154F00CEEDAA /* TransactionsTableViewController.swift */,
 				33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */,
+				33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */,
 				33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */,
 				33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */,
 				338E6FDF1D632F89009C42E5 /* Data */,
@@ -334,7 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33046CDB1D63154F00CEEDAA /* SalesTableViewController.swift in Sources */,
+				33046CDB1D63154F00CEEDAA /* TransactionsTableViewController.swift in Sources */,
 				33046CE51D6329F000CEEDAA /* AddTransactionTableViewController.swift in Sources */,
 				33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */,
 				33046CE11D63189400CEEDAA /* Transaction.swift in Sources */,

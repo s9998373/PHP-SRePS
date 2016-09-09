@@ -8,8 +8,12 @@
 
 import UIKit
 
+protocol AddTransactionTableViewControllerDelegate: class {
+    func didAddTransaction(sender: AddTransactionTableViewController, transaction: Transaction?)
+}
+
 class AddTransactionTableViewController: UITableViewController {
-    
+    weak var delegate: AddTransactionTableViewControllerDelegate!;
     var currentTransaction : Transaction!;
     let kCellIdentifier = "SalesEntryCellIdentifier";
 
@@ -54,10 +58,8 @@ class AddTransactionTableViewController: UITableViewController {
     }
     
     func doneAction(){
-        if (currentTransaction != nil && currentTransaction.numberOfItems() > 0) {
-            SalesDataSource.sharedManager.addTransaction(currentTransaction)
-        }
-        self.dismiss()
+        self.delegate.didAddTransaction(self, transaction: currentTransaction)
+//        self.dismiss()
     }
     
     func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){

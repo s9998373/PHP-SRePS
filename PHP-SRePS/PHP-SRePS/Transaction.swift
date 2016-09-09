@@ -28,6 +28,53 @@ class Transaction: Object {
 //        }
     }
     
+    func descriptiveString() -> String{
+        var numberOfItems = 0
+        let numberOfItemTypes = items.count
+        for item in items {
+            numberOfItems += item.quantity
+        }
+        struct constant{
+            static let pluralProduct = "products"
+            static let pluralItem = "items"
+            static let singleProduct = "products"
+            static let singleItem = "items"
+        }
+        
+        var productString:String, itemString:String
+        if (numberOfItems == 1) {
+            itemString = constant.singleItem
+        }else{
+            itemString = constant.pluralItem
+        }
+        if (numberOfItemTypes == 1) {
+            productString = constant.singleItem
+        }else{
+            productString = constant.pluralItem
+        }
+        
+        let result = "\(numberOfItemTypes) \(productString), \(numberOfItems). \(itemString)"
+        
+        return result
+    }
+    
+    func dateString() -> String{
+        return dateFormatter().stringFromDate(self.date!)
+    }
+    
+    func dateFormatter() -> NSDateFormatter{
+        struct Singleton {
+            static let instance = NSDateFormatter()
+            static let initialised = false;
+        }
+        
+        if (!Singleton.initialised) {
+            Singleton.instance.dateFormat = "yyyy-MM-dd"
+        }
+        
+        return Singleton.instance
+    }
+    
     func removeSalesEntry(salesEntry: SalesEntry){
         let idx = indexOfProduct(salesEntry.product!)
         if idx != NSNotFound {
