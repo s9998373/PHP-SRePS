@@ -68,9 +68,9 @@ class AddTransactionTableViewController: UITableViewController {
             currentTransaction = Transaction(date: NSDate());
         }
         
-        let salesEntry = SalesEntry();
-        salesEntry.product = selectedProduct
-        salesEntry.quantity = selectedQuantity
+        let salesEntry = SalesEntry(product: selectedProduct, quanity: selectedQuantity);
+//        salesEntry.product = selectedProduct
+//        salesEntry.quantity = selectedQuantity
         
         if (currentTransaction.doesProductExistInTransaction(selectedProduct)){
             handleDuplicateSalesEntry(salesEntry)

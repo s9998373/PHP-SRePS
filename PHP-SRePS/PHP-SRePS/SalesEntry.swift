@@ -10,19 +10,69 @@ import UIKit
 import RealmSwift
 
 class SalesEntry: Object {
-    dynamic var product:Product? = nil
-    dynamic var quantity:Int = 0
+    dynamic var _product:Product? = nil
+    var product: Product? {
+        get {
+            return _product
+        }
+        set {
+            _product = newValue!
+            calculateTotalCost()
+        }
+    }
+    private dynamic var _quantity:Int = 0
+    var quantity: Int? {
+        get {
+            return _quantity
+        }
+        set {
+            _quantity = newValue!
+            calculateTotalCost()
+        }
+    }
     dynamic var totalCost:String? = nil
     
-    convenience init(aProduct: Product, aQuanity: Int){
+    convenience init(product: Product, quanity: Int){
         self.init();
-        self.product = aProduct;
-        self.quantity = aQuanity;
+        _product = product;
+        _quantity = quanity;
+        calculateTotalCost()
         
-        let itemPrice = NSDecimalNumber(string: aProduct.price)
-        let total = itemPrice.decimalNumberByMultiplyingBy(NSDecimalNumber.init(long: aQuanity))
+//        let itemPrice = NSDecimalNumber(string: aProduct.price)
+    }
+    
+//    dynamic var quantity:Int{
+//        set{
+//            _quantity = newValue
+//            calculateTotalCost()
+//        }
+//        get{
+//            return _quantity
+//        }
+//    }
+//    
+//    dynamic var product:Product{
+//        set{
+//            _product = newValue
+//            calculateTotalCost()
+//        }
+//        get{
+//            return _product!
+//        }
+//    }
+    
+    func calculateTotalCost(){
+        let total = _product!.price.decimalNumberByMultiplyingBy(NSDecimalNumber.init(long: _quantity))
         totalCost = total.stringValue
     }
+    
+//    func totalCostString() -> String{
+//        return
+//    }
+//    
+//    func quantity() -> Int{
+//        
+//    }
     
     func decimalCost() -> NSDecimalNumber{
         let cost = NSDecimalNumber.init(string: totalCost)

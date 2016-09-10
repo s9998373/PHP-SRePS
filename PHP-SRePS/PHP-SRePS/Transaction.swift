@@ -20,10 +20,15 @@ class Transaction: Object {
         self.date = date;
     }
     
+    func salesEntriesChanged(){
+        calculateTotal()
+    }
+    
     func addSalesEntry(salesEntry: SalesEntry){
 //        SalesDataSource.safeWriteBlock { (result) in
         SalesDataSource.openWrite()
         self.items.append(salesEntry)
+        salesEntriesChanged()
         SalesDataSource.closeWrite()
 //        }
     }
@@ -59,26 +64,16 @@ class Transaction: Object {
     }
     
     func dateString() -> String{
-        return dateFormatter().stringFromDate(self.date!)
-    }
-    
-    func dateFormatter() -> NSDateFormatter{
-        struct Singleton {
-            static let instance = NSDateFormatter()
-            static let initialised = false;
-        }
-        
-        if (!Singleton.initialised) {
-            Singleton.instance.dateFormat = "yyyy-MM-dd"
-        }
-        
-        return Singleton.instance
+        return DataAdapters.dateFormatter().stringFromDate(self.date!)
     }
     
     func removeSalesEntry(salesEntry: SalesEntry){
         let idx = indexOfProduct(salesEntry.product!)
         if idx != NSNotFound {
+            SalesDataSource.openWrite()
             items.removeAtIndex(idx)
+            salesEntriesChanged()
+            SalesDataSource.closeWrite()
         }
     }
     
@@ -91,7 +86,10 @@ class Transaction: Object {
             }
         }
         
+        SalesDataSource.openWrite()
         oldEntry.quantity += salesEntry.quantity
+        salesEntriesChanged()
+        SalesDataSource.closeWrite()
     }
     
     func doesProductExistInTransaction(product: Product) -> Bool{
@@ -112,7 +110,10 @@ class Transaction: Object {
             return;
         }
         
+        SalesDataSource.openWrite()
         items.replace(idx!, object: newSalesEntry);
+        salesEntriesChanged()
+        SalesDataSource.closeWrite()
     }
     
     func indexOfProduct(product : Product) -> Int{
@@ -135,9 +136,16 @@ class Transaction: Object {
     func calculateTotal(){
         var total = NSDecimalNumber.init(long: 0)
         for entry in items{
-            total = total.decimalNumberByAdding(entry.decimalCost())
+            print("Decimal", entry.decimalCost())
+//            total = total.decimalNumberByAdding(entry.decimalCost())
         }
-        totalCost = total.stringValue
+        totalCost = ""
+//        totalCost = total.stringValue
+//        totalCost = DataAdapters.numberFormatter().stringFromNumber(total)
+    }
+    
+    func totalCostString() -> String{
+        return totalCost!
     }
 
 }

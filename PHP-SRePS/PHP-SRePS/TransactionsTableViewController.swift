@@ -71,7 +71,7 @@ class TransactionsTableViewController: UITableViewController {
         let transaction:Transaction = transactionList[indexPath.row] as! Transaction
         
         cell?.textLabel?.text = transaction.dateString()
-        cell?.detailTextLabel!.text = transaction.descriptiveString()
+        cell?.detailTextLabel!.text = transaction.totalCostString()
 
         return cell!
     }

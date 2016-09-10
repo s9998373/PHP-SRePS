@@ -10,34 +10,30 @@ import UIKit
 import RealmSwift
 import Realm
 
-class Product: Object {
+public class Product: Object {
     dynamic var name = ""
-    dynamic var price:String? = "0"
+//    dynamic var price:String? = "0"
+    private dynamic var _price = ""
+    
+    public var price: NSDecimalNumber {
+        get { return NSDecimalNumber(string: _price) }
+        set { _price = newValue.stringValue }
+    }
+    
+    public override class func ignoredProperties() -> [String] {
+        return ["price"]
+    }
     
     convenience init(aName: String, aPrice: String){
         self.init();
         self.name = aName;
-        self.price = aPrice;
+        _price = aPrice;
     }
     
     static let formatter = NSNumberFormatter()
     
     func localisedPrice() -> String{
-        let decimal = NSDecimalNumber.init(string: price) as NSDecimalNumber
-        return numberFormatter().stringFromNumber(decimal)!
-    }
-    
-    func numberFormatter() -> NSNumberFormatter{
-        struct Singleton {
-            static let instance = NSNumberFormatter()
-            static let initialised = false;
-        }
-        
-        if (!Singleton.initialised) {
-            Singleton.instance.numberStyle = .CurrencyAccountingStyle
-            Singleton.instance.locale = NSLocale.currentLocale()
-        }
-        
-        return Singleton.instance
+//        let decimal = NSDecimalNumber.init(string: price) as NSDecimalNumber
+        return DataAdapters.numberFormatter().stringFromNumber(self.price)!
     }
 }

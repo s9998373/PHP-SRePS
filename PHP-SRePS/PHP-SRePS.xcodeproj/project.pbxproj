@@ -26,6 +26,7 @@
 		BF002AFD1D90C80E0016F7AE /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF81D90C8060016F7AE /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF002AFE1D90C80E0016F7AE /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF91D90C8060016F7AE /* RealmSwift.framework */; };
 		BF002AFF1D90C80E0016F7AE /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF91D90C8060016F7AE /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BF002B021D90E7480016F7AE /* DataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B011D90E7480016F7AE /* DataAdapters.swift */; };
 		BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB813F91D6D4304007F46F5 /* SalesEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		AFF1AA79E58D531513AA8863 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF002AF81D90C8060016F7AE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		BF002AF91D90C8060016F7AE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		BF002B011D90E7480016F7AE /* DataAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAdapters.swift; sourceTree = "<group>"; };
 		BFB813F91D6D4304007F46F5 /* SalesEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 		338E6FDF1D632F89009C42E5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				BF002B011D90E7480016F7AE /* DataAdapters.swift */,
 				33046CDE1D63177900CEEDAA /* Product.swift */,
 				33046CE01D63189400CEEDAA /* Transaction.swift */,
 				BFB813F91D6D4304007F46F5 /* SalesEntry.swift */,
@@ -339,6 +342,7 @@
 				33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */,
 				33046CE11D63189400CEEDAA /* Transaction.swift in Sources */,
 				33046CDF1D63177900CEEDAA /* Product.swift in Sources */,
+				BF002B021D90E7480016F7AE /* DataAdapters.swift in Sources */,
 				BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */,
 				33046CA91D63131800CEEDAA /* AppDelegate.swift in Sources */,
 				33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */,
