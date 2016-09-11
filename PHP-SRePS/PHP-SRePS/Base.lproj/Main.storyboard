@@ -35,11 +35,11 @@
             </objects>
             <point key="canvasLocation" x="1570" y="-408"/>
         </scene>
-        <!--Sales-->
+        <!--Transactions-->
         <scene sceneID="bcc-Sd-58S">
             <objects>
                 <navigationController id="AgF-Gi-xV2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Sales" id="jCp-lS-KGg"/>
+                    <tabBarItem key="tabBarItem" title="Transactions" image="Transaction" selectedImage="Transaction" id="jCp-lS-KGg"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7AI-aU-ST8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -52,45 +52,24 @@
             </objects>
             <point key="canvasLocation" x="750" y="-408"/>
         </scene>
-        <!--Second-->
-        <scene sceneID="wg7-f3-ORb">
+        <!--View Controller-->
+        <scene sceneID="sXE-Ap-mby">
             <objects>
-                <viewController id="8rJ-Kc-sve" sceneMemberID="viewController">
+                <viewController id="Vf0-Er-CvX" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
-                        <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
+                        <viewControllerLayoutGuide type="top" id="Ftj-aH-Reh"/>
+                        <viewControllerLayoutGuide type="bottom" id="1p4-UY-5z0"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
+                    <view key="view" contentMode="scaleToFill" id="uel-Xy-chN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Second View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="195" y="279" width="210" height="42"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Loaded by SecondViewController" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDk-cv-Gan">
-                                <rect key="frame" x="192" y="329" width="216" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
-                            <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
-                            <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
-                            <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="Xvm-B3-1tl"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r4W-5u-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="1449" y="359"/>
         </scene>
         <!--Add Product-->
         <scene sceneID="8Sj-qZ-Nsk">
@@ -179,7 +158,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wz3-EN-SUT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2239" y="647"/>
+            <point key="canvasLocation" x="1191" y="1551"/>
         </scene>
         <!--New Transaction-->
         <scene sceneID="Nbd-4g-4a9">
@@ -208,7 +187,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Znu-sX-p4Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2191" y="1452"/>
+            <point key="canvasLocation" x="1143" y="2356"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0nN-qN-n5w">
@@ -224,7 +203,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WzN-gO-Zbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1371" y="1452"/>
+            <point key="canvasLocation" x="323" y="2356"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aIz-vC-1dY">
@@ -240,7 +219,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qzn-HZ-TMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1419" y="647"/>
+            <point key="canvasLocation" x="371" y="1551"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -255,15 +234,33 @@
                     </tabBar>
                     <connections>
                         <segue destination="AgF-Gi-xV2" kind="relationship" relationship="viewControllers" id="STY-W3-cAW"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="zA0-rQ-5f6" kind="relationship" relationship="viewControllers" id="5rU-Hr-sjU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="77" y="-135"/>
+            <point key="canvasLocation" x="-119" y="-131"/>
+        </scene>
+        <!--Reports-->
+        <scene sceneID="z89-wr-TaD">
+            <objects>
+                <navigationController id="zA0-rQ-5f6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Reports" image="Reports" selectedImage="Reports" id="tzo-UH-L4W"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a5y-sI-mZW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Vf0-Er-CvX" kind="relationship" relationship="rootViewController" id="I3k-Ml-Pm1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zgq-h6-vGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750" y="354"/>
         </scene>
     </scenes>
     <resources>
-        <image name="second" width="30" height="30"/>
+        <image name="Reports" width="27" height="22"/>
+        <image name="Transaction" width="30" height="22"/>
     </resources>
 </document>
