@@ -131,7 +131,7 @@ class AddTransactionTableViewController: UITableViewController {
         
         let currentItem = currentTransaction.salesEntryAtIndex(indexPath.row)
         cell!.textLabel?.text = currentItem.product!.name
-        cell!.detailTextLabel!.text = String(currentItem.quantity)
+        cell!.detailTextLabel!.text = String(currentItem.quantity!)
 
         return cell!
     }

@@ -37,7 +37,7 @@ class Transaction: Object {
         var numberOfItems = 0
         let numberOfItemTypes = items.count
         for item in items {
-            numberOfItems += item.quantity
+            numberOfItems += item.quantity!
         }
         struct constant{
             static let pluralProduct = "products"
@@ -87,7 +87,7 @@ class Transaction: Object {
         }
         
         SalesDataSource.openWrite()
-        oldEntry.quantity += salesEntry.quantity
+        oldEntry.quantity! += salesEntry.quantity!
         salesEntriesChanged()
         SalesDataSource.closeWrite()
     }
@@ -137,11 +137,11 @@ class Transaction: Object {
         var total = NSDecimalNumber.init(long: 0)
         for entry in items{
             print("Decimal", entry.decimalCost())
-//            total = total.decimalNumberByAdding(entry.decimalCost())
+            total = total.decimalNumberByAdding(entry.decimalCost())
         }
-        totalCost = ""
+//        totalCost = ""
 //        totalCost = total.stringValue
-//        totalCost = DataAdapters.numberFormatter().stringFromNumber(total)
+        totalCost = DataAdapters.numberFormatter().stringFromNumber(total)
     }
     
     func totalCostString() -> String{

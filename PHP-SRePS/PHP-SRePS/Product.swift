@@ -27,13 +27,14 @@ public class Product: Object {
     convenience init(aName: String, aPrice: String){
         self.init();
         self.name = aName;
-        _price = aPrice;
+        self.price = NSDecimalNumber.init(string: aPrice);
     }
     
     static let formatter = NSNumberFormatter()
     
     func localisedPrice() -> String{
 //        let decimal = NSDecimalNumber.init(string: price) as NSDecimalNumber
-        return DataAdapters.numberFormatter().stringFromNumber(self.price)!
+        let ret = DataAdapters.numberFormatter().stringFromNumber(self.price)!
+        return ret
     }
 }

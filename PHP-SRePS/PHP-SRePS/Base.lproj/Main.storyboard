@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Transactions-->
         <scene sceneID="ny5-AV-81n">
             <objects>
                 <tableViewController id="ySL-ID-0Nr" customClass="TransactionsTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
@@ -29,7 +29,7 @@
                             <outlet property="delegate" destination="ySL-ID-0Nr" id="ORe-oR-u3U"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ae2-gv-xbu"/>
+                    <navigationItem key="navigationItem" title="Transactions" id="ae2-gv-xbu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCl-l8-tCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

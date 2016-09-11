@@ -10,16 +10,18 @@ import UIKit
 import RealmSwift
 
 class SalesEntry: Object {
-    dynamic var _product:Product? = nil
-    var product: Product? {
-        get {
-            return _product
-        }
-        set {
-            _product = newValue!
-            calculateTotalCost()
-        }
-    }
+    dynamic var product:Product? = nil
+    
+//    var productz: Product? {
+//        get {
+//            return _product
+//        }
+//        set {
+//            _product = newValue!
+//            calculateTotalCost()
+//        }
+//    }
+    
     private dynamic var _quantity:Int = 0
     var quantity: Int? {
         get {
@@ -30,11 +32,12 @@ class SalesEntry: Object {
             calculateTotalCost()
         }
     }
+    
     dynamic var totalCost:String? = nil
     
     convenience init(product: Product, quanity: Int){
         self.init();
-        _product = product;
+        self.product = product;
         _quantity = quanity;
         calculateTotalCost()
         
@@ -62,7 +65,7 @@ class SalesEntry: Object {
 //    }
     
     func calculateTotalCost(){
-        let total = _product!.price.decimalNumberByMultiplyingBy(NSDecimalNumber.init(long: _quantity))
+        let total = self.product!.price.decimalNumberByMultiplyingBy(NSDecimalNumber.init(long: _quantity))
         totalCost = total.stringValue
     }
     
