@@ -20,31 +20,65 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
     var years:Array<String>!
     var customData:Array<String>!
     var timeframe:CalendarTimeframe = CalendarTimeframe.Monthly
+    var selectedYearRow:Int = 0, selectedCustomDataRow: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        calendarComponentPicker.delegate = self
+        calendarComponentPicker.dataSource = self
         populateComponentPicker()
         // Do any additional setup after loading the view.
     }
     
+    func setTimeframe(timeframe:CalendarTimeframe){
+        self.timeframe = timeframe
+    }
+    
     func populateComponentPicker(){
-        years = []
+        let date = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        calendar.minimumDaysInFirstWeek = 4
+        let components = calendar.components([.WeekOfYear , .Month , .Year], fromDate: date)
+        
+        let currentYear =  components.year
+        let currentMonth = components.month
+        let currentWeekOfYear = components.weekOfYear
+        
+        years = [String]()
         for year in 0..<67{
-            years[year] = String(year + 1970);
+            let adjustedYear = year + 1970
+            years.append(String(adjustedYear))
+            if (currentYear - 1 == adjustedYear) {
+                selectedYearRow = year
+            }
         }
         if (timeframe == CalendarTimeframe.Weekly) {
-            customData = []
-            for week in 1..<52{
-                customData[week - 1] = String(week)
+            customData = [String]()
+            for week in 1..<53{
+                customData.append(String(week))
+                if (currentWeekOfYear - 1 == week) {
+                    selectedCustomDataRow = week
+                }
             }
         }else{
-            let dateFormatter = NSDateFormatter()
+            customData = [String]()
+            let dateFormatter = NSDateFormatter.init()
+            dateFormatter.locale = NSLocale.currentLocale()
+            
             for month in 0..<12{
-                customData[month] = dateFormatter.monthSymbols[month]
+                let monthString = dateFormatter.standaloneMonthSymbols[month] as String?
+                print(monthString)
+                customData.append(monthString!)
+                if (currentMonth - 1 == month) {
+                    selectedCustomDataRow = month
+                }
             }
         }
         
         self.calendarComponentPicker.reloadAllComponents()
+        self.calendarComponentPicker.selectRow(selectedCustomDataRow, inComponent: 0, animated: false)
+        self.calendarComponentPicker.selectRow(selectedYearRow, inComponent: 1, animated: false)
     }
 
     override func didReceiveMemoryWarning() {

@@ -27,19 +27,17 @@ class ReportsTimeframeSelectorTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = self.storyboard
-        switch indexPath.row {
-        case 0:
-            
-            break
-        case 1:
-            break
-        case 2:
+        if (indexPath.row == 2) {
             let customTimeframeViewController = storyboard?.instantiateViewControllerWithIdentifier("CustomTimeframeSelectorReportViewController")
             self.navigationController?.pushViewController(customTimeframeViewController!, animated: true)
-            
-            break
-        default:
-            break
+        }else{
+            let calendarTimeframeViewController = storyboard?.instantiateViewControllerWithIdentifier("CalendarTimeframeSelectorReportViewController") as! CalendarTimeframeSelectorReportViewController
+            if (indexPath.row == 0) {
+                calendarTimeframeViewController.timeframe = CalendarTimeframe.Weekly
+            }else if (indexPath.row == 1){
+                calendarTimeframeViewController.timeframe = CalendarTimeframe.Monthly
+            }
+            self.navigationController?.pushViewController(calendarTimeframeViewController, animated: true)
         }
     }
 
