@@ -25,10 +25,25 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let nextButton = UIBarButtonItem.init(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CalendarTimeframeSelectorReportViewController.nextButtonPressed))
+        self.navigationItem.rightBarButtonItem = nextButton
+        
+        if (timeframe == CalendarTimeframe.Weekly) {
+            promptLabel.text = "Select a week and year:"
+            self.title = "Weekly Report"
+        }else{
+            promptLabel.text = "Select a month and year:"
+            self.title = "Monthly Report"
+        }
+        
         calendarComponentPicker.delegate = self
         calendarComponentPicker.dataSource = self
         populateComponentPicker()
         // Do any additional setup after loading the view.
+    }
+    
+    func nextButtonPressed(){
+        
     }
     
     func setTimeframe(timeframe:CalendarTimeframe){
@@ -49,7 +64,7 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
         for year in 0..<67{
             let adjustedYear = year + 1970
             years.append(String(adjustedYear))
-            if (currentYear - 1 == adjustedYear) {
+            if (currentYear == adjustedYear) {
                 selectedYearRow = year
             }
         }

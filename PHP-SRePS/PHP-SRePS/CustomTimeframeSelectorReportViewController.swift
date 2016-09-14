@@ -14,6 +14,9 @@ class CustomTimeframeSelectorReportViewController: UIViewController {
     @IBOutlet weak var endDate: UIDatePicker!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let nextButton = UIBarButtonItem.init(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CustomTimeframeSelectorReportViewController.nextButtonPressed))
+        self.navigationItem.rightBarButtonItem = nextButton
 
         // Do any additional setup after loading the view.
     }
@@ -23,15 +26,8 @@ class CustomTimeframeSelectorReportViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func nextButtonPressed(){
+        
     }
-    */
 
 }
