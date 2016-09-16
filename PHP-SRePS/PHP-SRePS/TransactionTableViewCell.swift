@@ -9,6 +9,9 @@
 import UIKit
 
 class TransactionTableViewCell: UITableViewCell {
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,6 +22,14 @@ class TransactionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    override var textLabel: UILabel?{
+        return dateLabel
+    }
+    
+    override var detailTextLabel: UILabel?{
+        return descriptionLabel
     }
 
 }
