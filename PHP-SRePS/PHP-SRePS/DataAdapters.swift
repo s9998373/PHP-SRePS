@@ -35,5 +35,18 @@ class DataAdapters {
         
         return Singleton.instance
     }
+    
+    static func calendar() -> NSCalendar{
+        struct Singleton {
+            static let instance = NSCalendar.currentCalendar()
+            static let initialised = false;
+        }
+        
+        if (!Singleton.initialised) {
+            Singleton.instance.minimumDaysInFirstWeek = 4
+        }
+        
+        return Singleton.instance
+    }
 
 }

@@ -23,6 +23,20 @@ extension RealmSwift.List {
     }
 }
 
+extension NSDate {
+    func dateLiesBetweenDates(beginDate: NSDate, endDate: NSDate) -> Bool {
+        if self.compare(beginDate) == .OrderedAscending {
+            return false
+        }
+        
+        if self.compare(endDate) == .OrderedDescending {
+            return false
+        }
+        
+        return true
+    }
+}
+
 class SalesDataSource: NSObject {
     static let sharedManager = SalesDataSource();
     
@@ -54,6 +68,49 @@ class SalesDataSource: NSObject {
         let result = realm.objects(Transaction).toNSArray();
         print(result)
         return result;
+    }
+    
+    func transactionsInMonth(month:Int, year:Int) -> NSArray{
+        let transactions = allTransactions()
+        let calendar = DataAdapters.calendar()
+        let results = NSMutableArray()
+        
+        for transaction in transactions {
+            let components = calendar.components([.Month, .Year], fromDate: transaction.date!!)
+            if (components.year == year && components.month == month) {
+                results.addObject(transaction as! Transaction)
+            }
+        }
+        
+        return results as NSArray
+    }
+    
+    func transactionsInWeek(week:Int, year:Int) -> NSArray{
+        let transactions = allTransactions()
+        let calendar = DataAdapters.calendar()
+        let results = NSMutableArray()
+        
+        for transaction in transactions {
+            let components = calendar.components([.WeekOfYear, .Year], fromDate: transaction.date!!)
+            if (components.year == year && components.weekOfYear == week) {
+                results.addObject(transaction as! Transaction)
+            }
+        }
+        
+        return results as NSArray
+    }
+    
+    func transactionsBetweenDates(start:NSDate, end:NSDate) -> NSArray{
+        let transactions = allTransactions()
+        let results = NSMutableArray()
+        
+        for transaction in transactions {
+            if (transaction.date!!.dateLiesBetweenDates(start, endDate: end)) {
+                results.addObject(transaction as! Transaction)
+            }
+        }
+        
+        return results as NSArray
     }
     
     func removeTransaction(item: Transaction) -> Bool{

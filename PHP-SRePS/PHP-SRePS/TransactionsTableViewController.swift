@@ -31,7 +31,8 @@ class TransactionsTableViewController: UITableViewController {
     }
     
     func refreshData(){
-        transactionList = SalesDataSource.sharedManager.allTransactions()
+//        transactionList = SalesDataSource.sharedManager.allTransactions()
+        transactionList = SalesDataSource.sharedManager.transactionsInMonth(9, year: 2016)
         self.tableView.reloadData()
     }
     
