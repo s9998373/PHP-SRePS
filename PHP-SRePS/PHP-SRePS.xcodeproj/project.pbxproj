@@ -30,6 +30,7 @@
 		BF002B041D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */; };
 		BF002B061D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */; };
 		BF002B081D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B071D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift */; };
+		BF002B0A1D9165E60016F7AE /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B091D9165E60016F7AE /* TransactionTableViewCell.swift */; };
 		BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB813F91D6D4304007F46F5 /* SalesEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTimeframeSelectorReportViewController.swift; sourceTree = "<group>"; };
 		BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimeframeSelectorReportViewController.swift; sourceTree = "<group>"; };
 		BF002B071D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportsTimeframeSelectorTableViewController.swift; sourceTree = "<group>"; };
+		BF002B091D9165E60016F7AE /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
 		BFB813F91D6D4304007F46F5 /* SalesEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 				BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */,
 				BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */,
 				BF002B071D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift */,
+				BF002B091D9165E60016F7AE /* TransactionTableViewCell.swift */,
 				338E6FDF1D632F89009C42E5 /* Data */,
 				BF002AF71D90C8060016F7AE /* Frameworks */,
 				33046CAE1D63131800CEEDAA /* Main.storyboard */,
@@ -354,6 +357,7 @@
 				33046CDF1D63177900CEEDAA /* Product.swift in Sources */,
 				BF002B021D90E7480016F7AE /* DataAdapters.swift in Sources */,
 				BF002B081D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift in Sources */,
+				BF002B0A1D9165E60016F7AE /* TransactionTableViewCell.swift in Sources */,
 				BFB813FA1D6D4304007F46F5 /* SalesEntry.swift in Sources */,
 				33046CA91D63131800CEEDAA /* AppDelegate.swift in Sources */,
 				33046CDD1D6316D000CEEDAA /* SalesDataSource.swift in Sources */,
