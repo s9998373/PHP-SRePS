@@ -247,6 +247,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="Reports" id="Xvm-B3-1tl"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="endDatePicker" destination="TRs-So-X4R" id="fXZ-kE-Nu7"/>
+                        <outlet property="startDatePicker" destination="qFO-uO-ajM" id="O9T-VF-CkF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r4W-5u-Cj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
