@@ -8,15 +8,15 @@
 
 import UIKit
 
+enum TransactionViewMode {
+    case All
+    case Specified
+}
+
 class TransactionsTableViewController: UITableViewController {
     var transactionList: NSArray!;
     let kCellIdentifier = "TransactionItemCell";
     var transactionViewMode: TransactionViewMode = TransactionViewMode.All
-    
-    enum TransactionViewMode {
-        case All
-        case Specified
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,7 @@ class TransactionsTableViewController: UITableViewController {
     }
     
     func refreshData(){
-//        transactionList = SalesDataSource.sharedManager.allTransactions()
-        transactionList = SalesDataSource.sharedManager.transactionsInMonth(9, year: 2016)
+        transactionList = SalesDataSource.sharedManager.allTransactions()
         self.tableView.reloadData()
     }
     

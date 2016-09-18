@@ -8,7 +8,7 @@
         <!--Transactions-->
         <scene sceneID="ny5-AV-81n">
             <objects>
-                <tableViewController id="ySL-ID-0Nr" customClass="TransactionsTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TransactionsTableViewController" id="ySL-ID-0Nr" customClass="TransactionsTableViewController" customModule="PHP_SRePS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="yxC-12-ITz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

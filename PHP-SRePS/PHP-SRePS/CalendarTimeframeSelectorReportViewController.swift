@@ -43,7 +43,19 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
     }
     
     func nextButtonPressed(){
+        let transactionsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TransactionsTableViewController") as! TransactionsTableViewController
+        transactionsViewController.transactionViewMode = TransactionViewMode.Specified
+        var dataSource:NSArray
+        let yearValue = Int(years[selectedYearRow])
+        let customDataValue = selectedCustomDataRow + 1
         
+        if (timeframe == CalendarTimeframe.Weekly) {
+            dataSource = SalesDataSource.sharedManager.transactionsInWeek(customDataValue, year: yearValue!)
+        }else{
+            dataSource = SalesDataSource.sharedManager.transactionsInMonth(customDataValue, year: yearValue!)
+        }
+        transactionsViewController.transactionList = dataSource
+        self.navigationController?.pushViewController(transactionsViewController, animated: true)
     }
     
     func setTimeframe(timeframe:CalendarTimeframe){
@@ -132,6 +144,14 @@ extension CalendarTimeframeSelectorReportViewController : UIPickerViewDataSource
             return customData[row]
         }else{
             return years[row]
+        }
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if (component == 0) {
+            selectedCustomDataRow = row
+        }else{
+            selectedYearRow = row
         }
     }
     
