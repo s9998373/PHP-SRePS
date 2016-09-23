@@ -20,12 +20,16 @@
 		33046CE31D631EE500CEEDAA /* AddProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */; };
 		33046CE51D6329F000CEEDAA /* AddTransactionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */; };
 		33046CE71D632A2400CEEDAA /* ProductsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */; };
-		BF002AFA1D90C8060016F7AE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF81D90C8060016F7AE /* Realm.framework */; };
-		BF002AFB1D90C8060016F7AE /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF91D90C8060016F7AE /* RealmSwift.framework */; };
-		BF002AFC1D90C80E0016F7AE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF81D90C8060016F7AE /* Realm.framework */; };
-		BF002AFD1D90C80E0016F7AE /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF81D90C8060016F7AE /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BF002AFE1D90C80E0016F7AE /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF91D90C8060016F7AE /* RealmSwift.framework */; };
-		BF002AFF1D90C80E0016F7AE /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BF002AF91D90C8060016F7AE /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9A51DA0EF490022F693 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9991DA0EF170022F693 /* Realm.framework */; };
+		3358A9A61DA0EF490022F693 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9991DA0EF170022F693 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9A71DA0EF490022F693 /* RealmConverter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A99A1DA0EF170022F693 /* RealmConverter.framework */; };
+		3358A9A81DA0EF490022F693 /* RealmConverter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A99A1DA0EF170022F693 /* RealmConverter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9A91DA0EF490022F693 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A99B1DA0EF170022F693 /* RealmSwift.framework */; };
+		3358A9AA1DA0EF490022F693 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A99B1DA0EF170022F693 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9B01DA0F1C40022F693 /* CSwiftV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */; };
+		3358A9B11DA0F1C40022F693 /* CSwiftV.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9B21DA0F1C40022F693 /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AD1DA0F1BD0022F693 /* PathKit.framework */; };
+		3358A9B31DA0F1C40022F693 /* PathKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AD1DA0F1BD0022F693 /* PathKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF002B021D90E7480016F7AE /* DataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B011D90E7480016F7AE /* DataAdapters.swift */; };
 		BF002B041D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */; };
 		BF002B061D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */; };
@@ -52,14 +56,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		BF002B001D90C80E0016F7AE /* Embed Frameworks */ = {
+		3358A9AB1DA0EF490022F693 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BF002AFF1D90C80E0016F7AE /* RealmSwift.framework in Embed Frameworks */,
-				BF002AFD1D90C80E0016F7AE /* Realm.framework in Embed Frameworks */,
+				3358A9A61DA0EF490022F693 /* Realm.framework in Embed Frameworks */,
+				3358A9A81DA0EF490022F693 /* RealmConverter.framework in Embed Frameworks */,
+				3358A9AA1DA0EF490022F693 /* RealmSwift.framework in Embed Frameworks */,
+				3358A9B31DA0F1C40022F693 /* PathKit.framework in Embed Frameworks */,
+				3358A9B11DA0F1C40022F693 /* CSwiftV.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,9 +93,12 @@
 		33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductTableViewController.swift; sourceTree = "<group>"; };
 		33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTransactionTableViewController.swift; sourceTree = "<group>"; };
 		33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsListTableViewController.swift; sourceTree = "<group>"; };
+		3358A9991DA0EF170022F693 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
+		3358A99A1DA0EF170022F693 /* RealmConverter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmConverter.framework; sourceTree = "<group>"; };
+		3358A99B1DA0EF170022F693 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CSwiftV.framework; sourceTree = "<group>"; };
+		3358A9AD1DA0F1BD0022F693 /* PathKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PathKit.framework; sourceTree = "<group>"; };
 		AFF1AA79E58D531513AA8863 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF002AF81D90C8060016F7AE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
-		BF002AF91D90C8060016F7AE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		BF002B011D90E7480016F7AE /* DataAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAdapters.swift; sourceTree = "<group>"; };
 		BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTimeframeSelectorReportViewController.swift; sourceTree = "<group>"; };
 		BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTimeframeSelectorReportViewController.swift; sourceTree = "<group>"; };
@@ -102,10 +112,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF002AFC1D90C80E0016F7AE /* Realm.framework in Frameworks */,
-				BF002AFB1D90C8060016F7AE /* RealmSwift.framework in Frameworks */,
-				BF002AFE1D90C80E0016F7AE /* RealmSwift.framework in Frameworks */,
-				BF002AFA1D90C8060016F7AE /* Realm.framework in Frameworks */,
+				3358A9A51DA0EF490022F693 /* Realm.framework in Frameworks */,
+				3358A9A71DA0EF490022F693 /* RealmConverter.framework in Frameworks */,
+				3358A9A91DA0EF490022F693 /* RealmSwift.framework in Frameworks */,
+				3358A9B21DA0F1C40022F693 /* PathKit.framework in Frameworks */,
+				3358A9B01DA0F1C40022F693 /* CSwiftV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,8 +221,11 @@
 		BF002AF71D90C8060016F7AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BF002AF81D90C8060016F7AE /* Realm.framework */,
-				BF002AF91D90C8060016F7AE /* RealmSwift.framework */,
+				3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */,
+				3358A9AD1DA0F1BD0022F693 /* PathKit.framework */,
+				3358A9991DA0EF170022F693 /* Realm.framework */,
+				3358A99A1DA0EF170022F693 /* RealmConverter.framework */,
+				3358A99B1DA0EF170022F693 /* RealmSwift.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -226,7 +240,7 @@
 				33046CA11D63131800CEEDAA /* Sources */,
 				33046CA21D63131800CEEDAA /* Frameworks */,
 				33046CA31D63131800CEEDAA /* Resources */,
-				BF002B001D90C80E0016F7AE /* Embed Frameworks */,
+				3358A9AB1DA0EF490022F693 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,19 +294,22 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = swindp2;
 				TargetAttributes = {
 					33046CA41D63131800CEEDAA = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = WVW2QXS9H2;
+						LastSwiftMigration = 0800;
 					};
 					33046CBA1D63131800CEEDAA = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 33046CA41D63131800CEEDAA;
 					};
 					33046CC51D63131800CEEDAA = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 33046CA41D63131800CEEDAA;
 					};
 				};
@@ -431,8 +448,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -477,8 +496,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -497,6 +518,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -520,6 +542,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -540,7 +563,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -552,6 +576,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PHP-SRePS.app/PHP-SRePS";
 			};
 			name = Debug;
@@ -564,6 +589,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PHP-SRePS.app/PHP-SRePS";
 			};
 			name = Release;
@@ -575,6 +601,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = "PHP-SRePS";
 			};
 			name = Debug;
@@ -586,6 +613,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.swindp2.PHP-SRePSUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = "PHP-SRePS";
 			};
 			name = Release;
