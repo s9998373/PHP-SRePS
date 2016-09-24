@@ -133,6 +133,14 @@ class Transaction: Object {
         return self.items.count
     }
     
+    func numberOfItemsString() -> String{
+        let numItems = self.numberOfItems()
+        if (numItems == 1) {
+            return "\(numItems) item"
+        }
+        return "\(numItems) items"
+    }
+    
     func calculateTotal(){
         var total = NSDecimalNumber.init(long: 0)
         for entry in items{

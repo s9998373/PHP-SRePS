@@ -26,6 +26,9 @@ class TransactionsTableViewController: UITableViewController {
             
             let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TransactionsTableViewController.addSaleItem));
             self.navigationItem.rightBarButtonItem = addButtonItem;
+            
+            let exportButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: #selector(TransactionsTableViewController.exportToCSV));
+            self.navigationItem.leftBarButtonItem = exportButtonItem;
         }
         self.tableView.rowHeight = 56
     }
@@ -33,6 +36,10 @@ class TransactionsTableViewController: UITableViewController {
     func refreshData(){
         transactionList = SalesDataSource.sharedManager.allTransactions()
         self.tableView.reloadData()
+    }
+    
+    func exportToCSV(){
+        SalesDataSource.sharedManager.exportToCSV()
     }
     
     func addSaleItem(){
@@ -70,7 +77,8 @@ class TransactionsTableViewController: UITableViewController {
         let transaction:Transaction = transactionList[indexPath.row] as! Transaction
         
         cell?.textLabel?.text = transaction.dateString()
-        cell?.detailTextLabel!.text = transaction.totalCostString()
+        cell?.priceLabel!.text = transaction.totalCostString()
+        cell?.detailTextLabel!.text = transaction.numberOfItemsString()
 
         return cell!
     }

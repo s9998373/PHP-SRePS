@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import RealmConverter
 
 extension Results {
     
@@ -44,7 +45,7 @@ class SalesDataSource: NSObject {
     
     override init() {
         super.init();
-        self.realm = try! Realm();
+        self.instateDatabase()
         print(self.realm);
     }
     
@@ -141,5 +142,63 @@ class SalesDataSource: NSObject {
             return false;
         }
         return true;
+    }
+    
+    func instateDatabase(){
+        self.realm = try! Realm();
+    }
+    
+    func exportToCSV(){
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+
+        let realmBaseFilePath = SalesDataSource.sharedManager.realm.configuration.fileURL!.path! as NSString
+        
+        // The default Realm database is likely open at the current time, this means we should copy it and backup the copy.
+        // This is much more reliable than dereferencing the database handles, which may be untracked.
+        let realmFilePath = realmBaseFilePath.stringByAppendingPathExtension("_tmp")
+        let outputFolderPath = documentsPath.stringByAppendingPathComponent(".CSV_OUT")
+        
+        var needsToCreateDirectory = false
+        var isDirectory:ObjCBool = false
+        var residualFileExists:ObjCBool = false
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        // Determine if we need to create the staging directory in .CSV_OUT
+        if (!fileManager.fileExistsAtPath(outputFolderPath, isDirectory: &isDirectory) || !isDirectory) {
+            needsToCreateDirectory = true
+        }
+        
+        if fileManager.fileExistsAtPath(realmFilePath!){
+            residualFileExists = true
+        }
+        
+        // Create the output directory, also create a copy of the Realm database.
+        do {
+            // Cleanup old file, if residual staging file remains from previous ocassion.
+            if residualFileExists {
+                try fileManager.removeItemAtPath(realmFilePath!)
+            }
+            
+            if needsToCreateDirectory {
+                try fileManager.createDirectoryAtPath(outputFolderPath, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            // Copy the file
+            try! fileManager.copyItemAtPath(realmBaseFilePath as String, toPath: realmFilePath!)
+        }catch let error as NSError{
+            print(error.localizedDescription)
+        }
+        
+        
+        let csvDataExporter = CSVDataExporter(realmFilePath: realmFilePath!)
+        try! csvDataExporter.exportToFolderAtPath(outputFolderPath)
+        
+        // Cleanup
+        do {
+            try fileManager.removeItemAtPath(realmFilePath!)
+        }catch let error as NSError{
+            print(error.localizedDescription)
+        }
     }
 }
