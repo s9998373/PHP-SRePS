@@ -46,7 +46,7 @@ class SalesDataSource: NSObject {
     override init() {
         super.init();
         self.instateDatabase()
-        print(self.realm);
+//        print(self.realm);
     }
     
     func addSalesProduct(item: Product) -> Bool{
@@ -67,7 +67,7 @@ class SalesDataSource: NSObject {
     
     func allTransactions() -> NSArray{
         let result = realm.objects(Transaction).toNSArray();
-        print(result)
+//        print(result)
         return result;
     }
     
@@ -177,22 +177,28 @@ class SalesDataSource: NSObject {
         do {
             // Cleanup old file, if residual staging file remains from previous ocassion.
             if residualFileExists {
+                print("[*] Removing risidual file...")
                 try fileManager.removeItemAtPath(realmFilePath!)
             }
             
             if needsToCreateDirectory {
+                print("[*] Creating staging directory...")
                 try fileManager.createDirectoryAtPath(outputFolderPath, withIntermediateDirectories: true, attributes: nil)
             }
             
             // Copy the file
+            print("[1] Cloning database for translation to CSV...")
             try! fileManager.copyItemAtPath(realmBaseFilePath as String, toPath: realmFilePath!)
         }catch let error as NSError{
             print(error.localizedDescription)
         }
         
         
+        print("[2] Opening database for translation to CSV...")
         let csvDataExporter = CSVDataExporter(realmFilePath: realmFilePath!)
+        print("[3] Generating CSV files...")
         try! csvDataExporter.exportToFolderAtPath(outputFolderPath)
+        print("[4] Backup to CSV complete!")
         
         // Cleanup
         do {
