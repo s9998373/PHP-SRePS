@@ -30,6 +30,8 @@
 		3358A9B11DA0F1C40022F693 /* CSwiftV.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3358A9B21DA0F1C40022F693 /* PathKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AD1DA0F1BD0022F693 /* PathKit.framework */; };
 		3358A9B31DA0F1C40022F693 /* PathKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9AD1DA0F1BD0022F693 /* PathKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3358A9BB1DA10DBE0022F693 /* ZipArchive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9B91DA10DB50022F693 /* ZipArchive.framework */; };
+		3358A9BC1DA10DBE0022F693 /* ZipArchive.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3358A9B91DA10DB50022F693 /* ZipArchive.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BF002B021D90E7480016F7AE /* DataAdapters.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B011D90E7480016F7AE /* DataAdapters.swift */; };
 		BF002B041D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */; };
 		BF002B061D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */; };
@@ -65,6 +67,7 @@
 				3358A9A61DA0EF490022F693 /* Realm.framework in Embed Frameworks */,
 				3358A9A81DA0EF490022F693 /* RealmConverter.framework in Embed Frameworks */,
 				3358A9AA1DA0EF490022F693 /* RealmSwift.framework in Embed Frameworks */,
+				3358A9BC1DA10DBE0022F693 /* ZipArchive.framework in Embed Frameworks */,
 				3358A9B31DA0F1C40022F693 /* PathKit.framework in Embed Frameworks */,
 				3358A9B11DA0F1C40022F693 /* CSwiftV.framework in Embed Frameworks */,
 			);
@@ -98,6 +101,7 @@
 		3358A99B1DA0EF170022F693 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
 		3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CSwiftV.framework; sourceTree = "<group>"; };
 		3358A9AD1DA0F1BD0022F693 /* PathKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PathKit.framework; sourceTree = "<group>"; };
+		3358A9B91DA10DB50022F693 /* ZipArchive.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZipArchive.framework; sourceTree = "<group>"; };
 		AFF1AA79E58D531513AA8863 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF002B011D90E7480016F7AE /* DataAdapters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAdapters.swift; sourceTree = "<group>"; };
 		BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTimeframeSelectorReportViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +119,7 @@
 				3358A9A51DA0EF490022F693 /* Realm.framework in Frameworks */,
 				3358A9A71DA0EF490022F693 /* RealmConverter.framework in Frameworks */,
 				3358A9A91DA0EF490022F693 /* RealmSwift.framework in Frameworks */,
+				3358A9BB1DA10DBE0022F693 /* ZipArchive.framework in Frameworks */,
 				3358A9B21DA0F1C40022F693 /* PathKit.framework in Frameworks */,
 				3358A9B01DA0F1C40022F693 /* CSwiftV.framework in Frameworks */,
 			);
@@ -221,6 +226,7 @@
 		BF002AF71D90C8060016F7AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3358A9B91DA10DB50022F693 /* ZipArchive.framework */,
 				3358A9AC1DA0F1BD0022F693 /* CSwiftV.framework */,
 				3358A9AD1DA0F1BD0022F693 /* PathKit.framework */,
 				3358A9991DA0EF170022F693 /* Realm.framework */,

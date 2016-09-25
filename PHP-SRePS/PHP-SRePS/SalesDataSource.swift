@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import RealmConverter
+import ZipArchive
 
 extension Results {
     
@@ -199,6 +200,8 @@ class SalesDataSource: NSObject {
         print("[3] Generating CSV files...")
         try! csvDataExporter.exportToFolderAtPath(outputFolderPath)
         print("[4] Backup to CSV complete!")
+        
+        
         
         // Cleanup
         do {
