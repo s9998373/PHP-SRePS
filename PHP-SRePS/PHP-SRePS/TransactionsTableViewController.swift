@@ -39,7 +39,15 @@ class TransactionsTableViewController: UITableViewController {
     }
     
     func exportToCSV(){
-        print(SalesDataSource.sharedManager.exportToCSV())
+        let backupLocation = SalesDataSource.sharedManager.exportToCSV()
+        print("Saved backup to \(backupLocation)")
+        
+        if backupLocation != nil {
+            let backupData = NSURL.fileURLWithPath(backupLocation!)
+            let activityVC = UIActivityViewController(activityItems: [backupData], applicationActivities: nil)
+            activityVC.popoverPresentationController?.sourceView = self.view
+            self.presentViewController(activityVC, animated: true, completion: nil)
+        }
     }
     
     func addSaleItem(){
