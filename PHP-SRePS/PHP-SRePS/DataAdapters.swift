@@ -21,6 +21,18 @@ class DataAdapters {
         
         return Singleton.instance
     }
+    static func dateTimeFormatter() -> NSDateFormatter{
+        struct Singleton {
+            static let instance = NSDateFormatter()
+            static let initialised = false;
+        }
+        
+        if (!Singleton.initialised) {
+            Singleton.instance.dateFormat = "yyyy-MM-dd HHmmss"
+        }
+        
+        return Singleton.instance
+    }
     
     static func numberFormatter() -> NSNumberFormatter{
         struct Singleton {

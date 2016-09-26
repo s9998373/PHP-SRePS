@@ -149,17 +149,26 @@ class SalesDataSource: NSObject {
         self.realm = try! Realm();
     }
     
-    func exportToCSV(){
+    func exportToCSV() -> String?{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
 
         let realmBaseFilePath = SalesDataSource.sharedManager.realm.configuration.fileURL!.path! as NSString
         
         // The default Realm database is likely open at the current time, this means we should copy it and backup the copy.
         // This is much more reliable than dereferencing the database handles, which may be untracked.
-        let realmFilePath = realmBaseFilePath.stringByAppendingPathExtension("_tmp")
+        let databaseStagingPath = documentsPath.stringByAppendingPathComponent(".REALM") as NSString
+        let realmFilePath = databaseStagingPath.stringByAppendingPathComponent(realmBaseFilePath.lastPathComponent)
         let outputFolderPath = documentsPath.stringByAppendingPathComponent(".CSV_OUT")
+        let zipOutputFolderPath = documentsPath.stringByAppendingPathComponent("Backups") as NSString
+        let dateTimeString = DataAdapters.dateTimeFormatter().stringFromDate(NSDate())
+        let zipSavePath = zipOutputFolderPath.stringByAppendingPathComponent("export-\(dateTimeString).zip")
         
-        var needsToCreateDirectory = false
+        print(zipSavePath)
+        
+        var needsToCreateStagingDirectory = false
+        var needsToCreateBackupDirectory = false
+        var needsToCreateDatabaseStagingDirectory = false
+        
         var isDirectory:ObjCBool = false
         var residualFileExists:ObjCBool = false
         
@@ -167,10 +176,18 @@ class SalesDataSource: NSObject {
         
         // Determine if we need to create the staging directory in .CSV_OUT
         if (!fileManager.fileExistsAtPath(outputFolderPath, isDirectory: &isDirectory) || !isDirectory) {
-            needsToCreateDirectory = true
+            needsToCreateStagingDirectory = true
         }
         
-        if fileManager.fileExistsAtPath(realmFilePath!){
+        if (!fileManager.fileExistsAtPath(zipOutputFolderPath as String, isDirectory: &isDirectory) || !isDirectory) {
+            needsToCreateBackupDirectory = true
+        }
+        
+        if (!fileManager.fileExistsAtPath(databaseStagingPath as String, isDirectory: &isDirectory) || !isDirectory) {
+            needsToCreateDatabaseStagingDirectory = true
+        }
+        
+        if fileManager.fileExistsAtPath(realmFilePath){
             residualFileExists = true
         }
         
@@ -179,35 +196,50 @@ class SalesDataSource: NSObject {
             // Cleanup old file, if residual staging file remains from previous ocassion.
             if residualFileExists {
                 print("[*] Removing risidual file...")
-                try fileManager.removeItemAtPath(realmFilePath!)
+                try fileManager.removeItemAtPath(realmFilePath)
             }
             
-            if needsToCreateDirectory {
+            if needsToCreateStagingDirectory {
                 print("[*] Creating staging directory...")
                 try fileManager.createDirectoryAtPath(outputFolderPath, withIntermediateDirectories: true, attributes: nil)
             }
             
+            if needsToCreateDatabaseStagingDirectory {
+                print("[*] Creating database staging directory...")
+                try fileManager.createDirectoryAtPath(databaseStagingPath as String, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            if needsToCreateBackupDirectory {
+                print("[*] Creating backup directory...")
+                try fileManager.createDirectoryAtPath(zipOutputFolderPath as String, withIntermediateDirectories: true, attributes: nil)
+            }
+            
             // Copy the file
             print("[1] Cloning database for translation to CSV...")
-            try! fileManager.copyItemAtPath(realmBaseFilePath as String, toPath: realmFilePath!)
+            try! fileManager.copyItemAtPath(realmBaseFilePath as String, toPath: realmFilePath)
         }catch let error as NSError{
             print(error.localizedDescription)
+            return nil
         }
         
         
         print("[2] Opening database for translation to CSV...")
-        let csvDataExporter = CSVDataExporter(realmFilePath: realmFilePath!)
+        let csvDataExporter = CSVDataExporter(realmFilePath: realmFilePath)
         print("[3] Generating CSV files...")
         try! csvDataExporter.exportToFolderAtPath(outputFolderPath)
         print("[4] Backup to CSV complete!")
         
-        
+        SSZipArchive.createZipFileAtPath(zipSavePath, withContentsOfDirectory: outputFolderPath, keepParentDirectory: false)
         
         // Cleanup
         do {
-            try fileManager.removeItemAtPath(realmFilePath!)
+            try fileManager.removeItemAtPath(databaseStagingPath as String)
+            try fileManager.removeItemAtPath(outputFolderPath)
         }catch let error as NSError{
             print(error.localizedDescription)
+            return nil
         }
+        
+        return zipSavePath
     }
 }

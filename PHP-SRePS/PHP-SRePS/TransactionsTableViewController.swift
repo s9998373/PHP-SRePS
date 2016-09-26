@@ -39,7 +39,7 @@ class TransactionsTableViewController: UITableViewController {
     }
     
     func exportToCSV(){
-        SalesDataSource.sharedManager.exportToCSV()
+        print(SalesDataSource.sharedManager.exportToCSV())
     }
     
     func addSaleItem(){
