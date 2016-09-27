@@ -135,6 +135,10 @@ class SalesDataSource: NSObject {
         sharedManager.realm.beginWrite();
     }
     
+    
+    /// Generic method to end a write transaction.
+    ///
+    /// - returns: true if the operation was successful, otherwise false.
     class func closeWrite() -> Bool{
         do{
             try sharedManager.realm.commitWrite();
@@ -145,10 +149,14 @@ class SalesDataSource: NSObject {
         return true;
     }
     
+    /// Loads the database.
     func instateDatabase(){
         self.realm = try! Realm();
     }
     
+    /// Exports the database to CSV and returns the path where the zipped backup was saved.
+    ///
+    /// - returns: The path of the backup.
     func exportToCSV() -> String?{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
 

@@ -32,21 +32,16 @@ class ProductsListTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = addButton;
         self.navigationItem.leftBarButtonItem = cancelButton
         
-//        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kCellIdentifier)
         self.reloadData();
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    /// Reloads the data and table view.
     func reloadData(){
         productList = SalesDataSource.sharedManager.allProducts();
         self.tableView.reloadData();
     }
     
+    /// Adds the new product that is actively being configured.
     func addNewProduct(){
         let controller = self.storyboardReference!.instantiateViewControllerWithIdentifier("AddProductTableViewController") as! AddProductTableViewController
         controller.delegate = self;
@@ -54,6 +49,7 @@ class ProductsListTableViewController: UITableViewController {
         self.presentViewController(nav, animated: true, completion: nil);
     }
     
+    /// Generic view controller dismissmal method.
     func dismiss(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -66,12 +62,10 @@ class ProductsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         if (productList != nil) {
             return productList.count;
         }
@@ -79,13 +73,10 @@ class ProductsListTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        var cell = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier)
         var cell:UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(kCellIdentifier) as UITableViewCell?
         if (cell == nil) {
             cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: kCellIdentifier)
-//            cell = UITableViewCell.init(style: UITableViewCellStyle.Subtitle, reuseIdentifier: kCellIdentifier)
         }
-        // Configure the cell...
         
         let product = productList[indexPath.row] as! Product;
         cell!.textLabel?.text = product.name;
@@ -95,41 +86,6 @@ class ProductsListTableViewController: UITableViewController {
         return cell!
     }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
             let selectedProduct: Product = productList[indexPath.row] as! Product;
@@ -137,6 +93,9 @@ class ProductsListTableViewController: UITableViewController {
         }
     }
     
+    /// Prompt the user to input a desired quantity.
+    ///
+    /// - parameter selectedProduct: The product that the quantity is being queried with regards to.
     func promptForQuantity(selectedProduct: Product){
         let alert = UIAlertController.init(title: "Quantity", message: "Select a quanity", preferredStyle: UIAlertControllerStyle.Alert);
         alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction) in
@@ -157,19 +116,17 @@ class ProductsListTableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension ProductsListTableViewController : UITextFieldDelegate{
+    
+    /// Only allow integers in textField.
+    ///
+    /// - parameter textField: The textField in question.
+    /// - parameter range:     The range of the string that is being affected.
+    /// - parameter string:    The replacement characters.
+    ///
+    /// - returns: <#return value description#>
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet()) != nil {
             return false
@@ -180,6 +137,11 @@ extension ProductsListTableViewController : UITextFieldDelegate{
 }
 
 extension ProductsListTableViewController : AddProductTableViewControllerDelegate{
+    
+    /// When a product is added, refresh the list of products.
+    ///
+    /// - parameter sender:  The controller that added the product.
+    /// - parameter product: The new product.
     func didAddProduct(sender: AddProductTableViewController, product: Product) {
         self.reloadData();
     }

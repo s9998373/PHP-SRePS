@@ -33,11 +33,13 @@ class TransactionsTableViewController: UITableViewController {
         self.tableView.rowHeight = 56
     }
     
+    /// Refreshes the data and table.
     func refreshData(){
         transactionList = SalesDataSource.sharedManager.allTransactions()
         self.tableView.reloadData()
     }
     
+    /// Backs the current database up and offers the ability to share it with system applications.
     func exportToCSV(){
         let backupLocation = SalesDataSource.sharedManager.exportToCSV()
         print("Saved backup to \(backupLocation)")
@@ -50,6 +52,7 @@ class TransactionsTableViewController: UITableViewController {
         }
     }
     
+    /// Presents the new transation controller.
     func addSaleItem(){
         print("Adding a new item.");
         let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddTransactionTableViewController") as! AddTransactionTableViewController;
@@ -94,6 +97,11 @@ class TransactionsTableViewController: UITableViewController {
 }
 
 extension TransactionsTableViewController : AddTransactionTableViewControllerDelegate{
+    
+    /// Handle new transaction added.
+    ///
+    /// - parameter sender:      The view controller that added the transaction.
+    /// - parameter transaction: The new transation.
     func didAddTransaction(sender: AddTransactionTableViewController, transaction: Transaction?) {
         if (transaction != nil && transaction!.numberOfItems() > 0) {
             SalesDataSource.sharedManager.addTransaction(transaction!)

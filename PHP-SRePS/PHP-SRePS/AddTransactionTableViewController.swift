@@ -31,37 +31,37 @@ class AddTransactionTableViewController: UITableViewController {
         let buttons = [flexibleSpaceItem, addProductButton, flexibleSpaceItem];
         self.setToolbarItems(buttons, animated: true);
         self.toolbarItems = buttons;
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    
+    /// Reload the table view.
     func reloadData(){
-//        self.tableView.reloadData()
         self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
+    /// Display the new product view controller.
     func addProduct(){
         let controller = ProductsListTableViewController.init();
         controller.storyboardReference = self.storyboard;
         controller.delegate = self;
         let nav = UINavigationController.init(rootViewController: controller);
-//        self.navigationController?.pushViewController(controller, animated: true);
         self.presentViewController(nav, animated: true, completion: nil);
     }
     
+    /// Generic method to dismiss the view controller.
     func dismiss(){
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    /// Handle when the use taps done.
     func doneAction(){
         self.delegate.didAddTransaction(self, transaction: currentTransaction)
-//        self.dismiss()
     }
     
+    /// Handles the user selecting a product in the product selection controller.
+    ///
+    /// - parameter selectedProduct:  The product that was selected.
+    /// - parameter selectedQuantity: The quantity of the selected product.
     func handleSelectedProduct(selectedProduct: Product, selectedQuantity: Int){
         print("Selected ", selectedQuantity, " of ", selectedProduct.name, ".");
         if (currentTransaction == nil) {
@@ -69,8 +69,6 @@ class AddTransactionTableViewController: UITableViewController {
         }
         
         let salesEntry = SalesEntry(product: selectedProduct, quanity: selectedQuantity);
-//        salesEntry.product = selectedProduct
-//        salesEntry.quantity = selectedQuantity
         
         if (currentTransaction.doesProductExistInTransaction(selectedProduct)){
             handleDuplicateSalesEntry(salesEntry)
@@ -80,6 +78,10 @@ class AddTransactionTableViewController: UITableViewController {
         
     }
     
+    
+    /// If the product already exists, allow the user to summate the total of products or input a new amount.
+    ///
+    /// - parameter salesEntry: The sales entry that is affected/already exists for a given product type.
     func handleDuplicateSalesEntry(salesEntry : SalesEntry){
         
         let alert = UIAlertController.init(title: "Information", message: "A sales entry for this product already exists. Do you wish to summate the existing and new quantities?", preferredStyle: UIAlertControllerStyle.Alert);
@@ -94,6 +96,10 @@ class AddTransactionTableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
+    
+    /// Handles the case where a given SalesEntry to be added is unique.
+    ///
+    /// - parameter salesEntry: The SalesEntry to be added.
     func handleAdditionalSalesEntry(salesEntry : SalesEntry){
         currentTransaction.addSalesEntry(salesEntry)
         self.reloadData()
@@ -135,58 +141,11 @@ class AddTransactionTableViewController: UITableViewController {
 
         return cell!
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
 extension AddTransactionTableViewController : ProductsListTableViewControllerDelegate{
     func didSelectProduct(sender: ProductsListTableViewController, product: Product, selectedQuantity: Int) {
-//        sender.navigationController?.popViewControllerAnimated(true);
         sender.dismissViewControllerAnimated(true, completion: nil);
         handleSelectedProduct(product, selectedQuantity: selectedQuantity);
     }

@@ -16,6 +16,7 @@ class AddProductTableViewController: UITableViewController {
     weak var delegate: AddProductTableViewControllerDelegate!;
     @IBOutlet weak var productNameTextField: UITextField!
     @IBOutlet weak var productPriceTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad();
         
@@ -28,12 +29,13 @@ class AddProductTableViewController: UITableViewController {
         self.tableView.allowsSelection = false;
     }
     
+    /// Generic view controller dismissal method.
     func dismissController(){
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
+    /// Adds the new product to the database.
     func addItem(){
-//        print("Product name: ", self.productNameTextField.text, ". Product price: ", self.productPriceTextField.text, ".");
         let name: String = self.productNameTextField.text!;
         let price: String = self.productPriceTextField.text!;
         
