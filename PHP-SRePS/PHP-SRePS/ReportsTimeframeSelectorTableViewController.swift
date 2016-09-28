@@ -25,6 +25,11 @@ class ReportsTimeframeSelectorTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    /// Display a controller depending on the type of report the user wishes to generate.
+    ///
+    /// - parameter tableView: The tableview containing the selected cell.
+    /// - parameter indexPath: The indexPath of the selected cell.
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let storyboard = self.storyboard
         if (indexPath.row == 2) {

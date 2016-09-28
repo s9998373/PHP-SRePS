@@ -31,6 +31,8 @@ class CustomTimeframeSelectorReportViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    /// Obtains a set of transactions that meet the requirements of the predicate defined by the user.
+    /// A TransactionTableViewController is then pushed, displaying this data.
     func nextButtonPressed(){
         let transactionsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TransactionsTableViewController") as! TransactionsTableViewController
         transactionsViewController.transactionViewMode = TransactionViewMode.Specified

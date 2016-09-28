@@ -24,15 +24,19 @@ class Transaction: Object {
         calculateTotal()
     }
     
+    /// Adds a sales entry to the transaction.
+    ///
+    /// - parameter salesEntry: The SalesEntry to be added.
     func addSalesEntry(salesEntry: SalesEntry){
-//        SalesDataSource.safeWriteBlock { (result) in
         SalesDataSource.openWrite()
         self.items.append(salesEntry)
         salesEntriesChanged()
         SalesDataSource.closeWrite()
-//        }
     }
     
+    /// A readable string representation of the transaction.
+    ///
+    /// - returns: The descriptive string.
     func descriptiveString() -> String{
         var numberOfItems = 0
         let numberOfItemTypes = items.count
@@ -63,10 +67,16 @@ class Transaction: Object {
         return result
     }
     
+    /// A string that represents the transaction date.
+    ///
+    /// - returns: The date string.
     func dateString() -> String{
         return DataAdapters.dateFormatter().stringFromDate(self.date!)
     }
     
+    /// Removes a SalesEntry from the transation.
+    ///
+    /// - parameter salesEntry: The SalesEntry to be removed.
     func removeSalesEntry(salesEntry: SalesEntry){
         let idx = indexOfProduct(salesEntry.product!)
         if idx != NSNotFound {
@@ -77,6 +87,9 @@ class Transaction: Object {
         }
     }
     
+    /// Merges two SalesEntries.
+    ///
+    /// - parameter salesEntry: The new SalesEntry that will be merged.
     func mergeSalesEntry(salesEntry: SalesEntry){
         var oldEntry: SalesEntry!
         for entry in items{
@@ -92,12 +105,12 @@ class Transaction: Object {
         SalesDataSource.closeWrite()
     }
     
+    /// Determines if a given product is already a part of the transaction.
+    ///
+    /// - parameter product: The product in question.
+    ///
+    /// - returns: True if the product exists in the transaction, otherwise, false.
     func doesProductExistInTransaction(product: Product) -> Bool{
-//        for entry in items{
-//            if entry.product!.name == product.name {
-//                return true;
-//            }
-//        }
         let idx = indexOfProduct(product)
         return idx != NSNotFound
     }
@@ -116,6 +129,12 @@ class Transaction: Object {
         SalesDataSource.closeWrite()
     }
     
+    
+    /// The index of the product in the transaction's entry list.
+    ///
+    /// - parameter product: The product in question.
+    ///
+    /// - returns: The index of the product, if unfound, NSNotFound.
     func indexOfProduct(product : Product) -> Int{
         for entry in items{
             if entry.product == product{
@@ -125,14 +144,25 @@ class Transaction: Object {
         return NSNotFound
     }
     
+    /// Returns a SalesEntry at a given index.
+    ///
+    /// - parameter index: The index to retrieve a sales entry from.
+    ///
+    /// - returns: The SalesEntry at the provided index.
     func salesEntryAtIndex(index: Int) -> SalesEntry{
         return items[index]
     }
     
+    /// Returns the number of items in the transaction.
+    ///
+    /// - returns: The number of items in the transaction.
     func numberOfItems() -> Int{
         return self.items.count
     }
     
+    /// Returns a string representing the number of items in the transaction.
+    ///
+    /// - returns: The string representing the number of items in the transaction.
     func numberOfItemsString() -> String{
         let numItems = self.numberOfItems()
         if (numItems == 1) {
@@ -141,17 +171,19 @@ class Transaction: Object {
         return "\(numItems) items"
     }
     
+    /// Calculates the total cost of the transaction and saves it to the database.
     func calculateTotal(){
         var total = NSDecimalNumber.init(long: 0)
         for entry in items{
             print("Decimal", entry.decimalCost())
             total = total.decimalNumberByAdding(entry.decimalCost())
         }
-//        totalCost = ""
-//        totalCost = total.stringValue
         totalCost = DataAdapters.numberFormatter().stringFromNumber(total)
     }
     
+    /// Returns the total value of the transaction in the form of a string.
+    ///
+    /// - returns: The total value of the transaction in the form of a string.
     func totalCostString() -> String{
         return totalCost!
     }

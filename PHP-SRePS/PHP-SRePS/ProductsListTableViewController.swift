@@ -126,7 +126,7 @@ extension ProductsListTableViewController : UITextFieldDelegate{
     /// - parameter range:     The range of the string that is being affected.
     /// - parameter string:    The replacement characters.
     ///
-    /// - returns: <#return value description#>
+    /// - returns: True is the given string should be added to the textField, otherwise, false.
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if string.rangeOfCharacterFromSet(NSCharacterSet.letterCharacterSet()) != nil {
             return false

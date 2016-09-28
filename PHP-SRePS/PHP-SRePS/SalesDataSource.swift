@@ -13,6 +13,10 @@ import ZipArchive
 
 extension Results {
     
+    
+    /// Allows translation from a Results to an NSArray.
+    ///
+    /// - returns: The Results in NSArray format.
     func toNSArray() -> NSArray {
         return self.map{$0}
     }
@@ -20,12 +24,22 @@ extension Results {
 
 extension RealmSwift.List {
     
+    /// Allows translation from a Realm list to an NSArray.
+    ///
+    /// - returns: The Realm list in NSArray format.
     func toNSArray() -> NSArray {
         return self.map{$0}
     }
 }
 
 extension NSDate {
+    
+    /// Determines if a date lies between two dates (inclusive).
+    ///
+    /// - parameter beginDate: The start date.
+    /// - parameter endDate:   The end date.
+    ///
+    /// - returns: True if the date lies between each of the provided dates, inclusively, otherwise, false
     func dateLiesBetweenDates(beginDate: NSDate, endDate: NSDate) -> Bool {
         if self.compare(beginDate) == .OrderedAscending {
             return false
@@ -47,31 +61,59 @@ class SalesDataSource: NSObject {
     override init() {
         super.init();
         self.instateDatabase()
-//        print(self.realm);
     }
     
+    
+    /// Adds a Product to the database.
+    ///
+    /// - parameter item: The product to be added.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     func addSalesProduct(item: Product) -> Bool{
         return abstractAdd(item);
     }
     
+    /// Removes a product from the database.
+    ///
+    /// - parameter item: The product to be removed.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     func removeSalesProduct(item: Product) -> Bool{
         return abstractDelete(item);
     }
     
+    
+    /// Returns all products contained within the database.
+    ///
+    /// - returns: An array of all of the products.
     func allProducts() -> NSArray{
         return realm.objects(Product).toNSArray();
     }
     
+    
+    /// Adds a transation to the database.
+    ///
+    /// - parameter item: The transaction to be added.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     func addTransaction(item: Transaction) -> Bool{
         return abstractAdd(item);
     }
     
+    /// Returns all transactions contained within the database.
+    ///
+    /// - returns: An array of all of the transactions.
     func allTransactions() -> NSArray{
         let result = realm.objects(Transaction).toNSArray();
-//        print(result)
         return result;
     }
     
+    /// Returns all transactions contained within the database during a given month and year.
+    ///
+    /// - parameter month: The month where transactions were made.
+    /// - parameter year:  The year where transactions were made.
+    ///
+    /// - returns: An array of all of the transactions that fulfill the date constraints imposed.
     func transactionsInMonth(month:Int, year:Int) -> NSArray{
         let transactions = allTransactions()
         let calendar = DataAdapters.calendar()
@@ -87,6 +129,12 @@ class SalesDataSource: NSObject {
         return results as NSArray
     }
     
+    /// Returns all transactions contained within the database during a given week and year.
+    ///
+    /// - parameter week: The week where transactions were made.
+    /// - parameter year: The year where transactions were made.
+    ///
+    /// - returns: An array of all of the transactions that fulfill the date constraints imposed.
     func transactionsInWeek(week:Int, year:Int) -> NSArray{
         let transactions = allTransactions()
         let calendar = DataAdapters.calendar()
@@ -102,6 +150,12 @@ class SalesDataSource: NSObject {
         return results as NSArray
     }
     
+    /// Returns all transactions contained within the database between two given months.
+    ///
+    /// - parameter start: The start month.
+    /// - parameter end:   The end month.
+    ///
+    /// - returns: An array of all of the transactions that fulfill the date constraints imposed.
     func transactionsBetweenDates(start:NSDate, end:NSDate) -> NSArray{
         let transactions = allTransactions()
         let results = NSMutableArray()
@@ -115,22 +169,41 @@ class SalesDataSource: NSObject {
         return results as NSArray
     }
     
+    /// Removes a product from the database.
+    ///
+    /// - parameter item: The product to be removed.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     func removeTransaction(item: Transaction) -> Bool{
         return abstractDelete(item);
     }
     
+    
+    /// Abstract method to add an item to the database.
+    ///
+    /// - parameter item: The item to be added.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     private func abstractAdd(item: Object) -> Bool{
         SalesDataSource.openWrite();
         self.realm.add(item);
         return SalesDataSource.closeWrite();
     }
     
+    
+    /// Abstract method to delete an object from the database.
+    ///
+    /// - parameter item: The item to be deleted from the database.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
     private func abstractDelete(item: Object) -> Bool{
         SalesDataSource.openWrite();
         self.realm.delete(item);
         return SalesDataSource.closeWrite();
     }
 
+    
+    /// Opens a write transaction.
     class func openWrite(){
         sharedManager.realm.beginWrite();
     }

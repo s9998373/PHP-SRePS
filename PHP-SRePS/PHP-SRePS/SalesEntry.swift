@@ -12,16 +12,6 @@ import RealmSwift
 class SalesEntry: Object {
     dynamic var product:Product? = nil
     
-//    var productz: Product? {
-//        get {
-//            return _product
-//        }
-//        set {
-//            _product = newValue!
-//            calculateTotalCost()
-//        }
-//    }
-    
     private dynamic var _quantity:Int = 0
     var quantity: Int? {
         get {
@@ -35,48 +25,28 @@ class SalesEntry: Object {
     
     dynamic var totalCost:String? = nil
     
+    /// Creates a sales entry from a product and quantity.
+    ///
+    /// - parameter product: The product.
+    /// - parameter quanity: The quantity of the product.
+    ///
+    /// - returns: The SalesEntry for the product and quantity.
     convenience init(product: Product, quanity: Int){
         self.init();
         self.product = product;
         _quantity = quanity;
         calculateTotalCost()
-        
-//        let itemPrice = NSDecimalNumber(string: aProduct.price)
     }
     
-//    dynamic var quantity:Int{
-//        set{
-//            _quantity = newValue
-//            calculateTotalCost()
-//        }
-//        get{
-//            return _quantity
-//        }
-//    }
-//    
-//    dynamic var product:Product{
-//        set{
-//            _product = newValue
-//            calculateTotalCost()
-//        }
-//        get{
-//            return _product!
-//        }
-//    }
-    
+    /// Calculates the total value of the SalesEntry.
     func calculateTotalCost(){
         let total = self.product!.price.decimalNumberByMultiplyingBy(NSDecimalNumber.init(long: _quantity))
         totalCost = total.stringValue
     }
     
-//    func totalCostString() -> String{
-//        return
-//    }
-//    
-//    func quantity() -> Int{
-//        
-//    }
-    
+    /// Translates the total cost to an NSDecimalNumber.
+    ///
+    /// - returns: An NSDecimalNumber representation of the total cost.
     func decimalCost() -> NSDecimalNumber{
         let cost = NSDecimalNumber.init(string: totalCost)
         return cost

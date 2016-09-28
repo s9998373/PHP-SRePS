@@ -32,8 +32,10 @@ public class Product: Object {
     
     static let formatter = NSNumberFormatter()
     
+    /// Returns a localised string with currency symbol.
+    ///
+    /// - returns: A price prefixed with a currency symbol.
     func localisedPrice() -> String{
-//        let decimal = NSDecimalNumber.init(string: price) as NSDecimalNumber
         let ret = DataAdapters.numberFormatter().stringFromNumber(self.price)!
         return ret
     }

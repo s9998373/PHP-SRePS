@@ -24,10 +24,13 @@ class TransactionTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    /// Override for convenience and to deter mistakes from people unfamiliar with the codebase.
     override var textLabel: UILabel?{
         return dateLabel
     }
     
+    /// Override for convenience and to deter mistakes from people unfamiliar with the codebase.
     override var detailTextLabel: UILabel?{
         return descriptionLabel
     }

@@ -42,6 +42,9 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    /// Obtains a set of transactions that meet the requirements of the predicate defined by the user.
+    /// A TransactionTableViewController is then pushed, displaying this data.
     func nextButtonPressed(){
         let transactionsViewController = self.storyboard?.instantiateViewControllerWithIdentifier("TransactionsTableViewController") as! TransactionsTableViewController
         transactionsViewController.transactionViewMode = TransactionViewMode.Specified
@@ -58,10 +61,14 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
         self.navigationController?.pushViewController(transactionsViewController, animated: true)
     }
     
+    /// Sets the timeframe (Weekly or Monthly).
+    ///
+    /// - parameter timeframe: The new timeframe.
     func setTimeframe(timeframe:CalendarTimeframe){
         self.timeframe = timeframe
     }
     
+    /// Populates the component picker with weeks or months depending on the timeframe selected.
     func populateComponentPicker(){
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
@@ -112,20 +119,11 @@ class CalendarTimeframeSelectorReportViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
+
+// MARK: - UIPickerViewDataSource, UIPickerViewDelegate Handles operations related to the picker.
 extension CalendarTimeframeSelectorReportViewController : UIPickerViewDataSource, UIPickerViewDelegate{
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
