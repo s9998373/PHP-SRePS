@@ -46,7 +46,7 @@ class SalesEntry: Object {
     
     /// Translates the total cost to an NSDecimalNumber.
     ///
-    /// - returns: An NSDecimalNumber representation of the total cost.
+    /// - returns: An NSDecimalNumber representation of the total cost.z
     func decimalCost() -> NSDecimalNumber{
         let cost = NSDecimalNumber.init(string: totalCost)
         return cost

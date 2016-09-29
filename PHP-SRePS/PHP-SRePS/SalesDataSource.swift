@@ -240,9 +240,10 @@ class SalesDataSource: NSObject {
         let databaseStagingPath = documentsPath.stringByAppendingPathComponent(".REALM") as NSString
         let realmFilePath = databaseStagingPath.stringByAppendingPathComponent(realmBaseFilePath.lastPathComponent)
         let outputFolderPath = documentsPath.stringByAppendingPathComponent(".CSV_OUT")
+        let metaDataPath = (outputFolderPath as NSString).stringByAppendingPathComponent("metadata.plist")
         let zipOutputFolderPath = documentsPath.stringByAppendingPathComponent("Backups") as NSString
         let dateTimeString = DataAdapters.dateTimeFormatter().stringFromDate(NSDate())
-        let zipSavePath = zipOutputFolderPath.stringByAppendingPathComponent("export-\(dateTimeString).zip")
+        let zipSavePath = zipOutputFolderPath.stringByAppendingPathComponent("backup-export-\(dateTimeString).phpbk")
         
         print(zipSavePath)
         
@@ -309,6 +310,14 @@ class SalesDataSource: NSObject {
         print("[3] Generating CSV files...")
         try! csvDataExporter.exportToFolderAtPath(outputFolderPath)
         print("[4] Backup to CSV complete!")
+        
+        print("[5] Creating metadata file...")
+        
+        
+        let versionNumber = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String
+        let metaDataDict:NSDictionary = ["data" : NSDate(),
+                                         "version" : versionNumber]
+        metaDataDict.writeToFile(metaDataPath, atomically: true)
         
         SSZipArchive.createZipFileAtPath(zipSavePath, withContentsOfDirectory: outputFolderPath, keepParentDirectory: false)
         
