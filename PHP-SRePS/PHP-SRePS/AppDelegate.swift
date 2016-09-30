@@ -39,15 +39,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Ooops! Something went wrong: \(error)")
             }
             exit(0)
-        
-//            let realm = try! Realm()
-//            try! realm.write {
-////                realm.deleteAll()
-//                exit(0)
-//            }
         }
         
         // Override point for customization after application launch.
+        return true
+    }
+    
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        let filePathString = url.path! as NSString
+        if filePathString.hasSuffix(".phpbk") {
+            SalesDataSource.sharedManager.importFromPath(filePathString as String)
+        }
         return true
     }
 

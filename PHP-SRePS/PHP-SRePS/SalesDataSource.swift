@@ -332,4 +332,62 @@ class SalesDataSource: NSObject {
         
         return zipSavePath
     }
+    
+    func importFromPath(path: String){
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        
+        let realmBaseFilePath = SalesDataSource.sharedManager.realm.configuration.fileURL!.path! as NSString
+        let databaseStagingPath = documentsPath.stringByAppendingPathComponent(".CSV_IN") as NSString
+        let databaseRestoreDirectory = documentsPath.stringByAppendingPathComponent("RESTORE") as NSString
+        let databaseRestorePath = databaseRestoreDirectory.stringByAppendingPathComponent("default.realm")
+        let fileManager = NSFileManager.defaultManager()
+        
+        if !fileManager.fileExistsAtPath(databaseRestorePath as String) {
+            try? fileManager.createDirectoryAtPath(databaseRestoreDirectory as String, withIntermediateDirectories: true, attributes: nil)
+        }
+        
+//        SSZipArchive.unzipFileAtPath(path, toDestination: databaseStagingPath as String)
+        
+        var csvFiles = [String]()
+        var metaDataFilePath:String? = nil
+        
+        do{
+            let files = try fileManager.contentsOfDirectoryAtPath(databaseStagingPath as String)
+            
+            for file:String in files{
+                let lowered = file.lowercaseString
+                
+                if lowered.hasSuffix(".csv") {
+                    csvFiles.append(databaseStagingPath.stringByAppendingPathComponent(file) as String)
+                }else if(lowered.hasSuffix(".plist")) {
+                    metaDataFilePath = databaseStagingPath.stringByAppendingPathComponent(file)
+                }
+            }
+        }catch let error as NSError{
+            print(error.localizedDescription)
+            return
+        }
+        
+        if csvFiles.count < 1 {
+            return
+        }
+        
+        let metaDataDictionary = NSDictionary.init(contentsOfFile: metaDataFilePath!)
+        print(metaDataDictionary)
+        
+//        let config = Realm.Configuration(
+//            // Get the URL to the bundled file
+//            fileURL: NSURL.fileURLWithPath(databaseRestorePath),
+//            // Open the file in read-only mode as application bundles are not writeable
+//            readOnly: true)
+//        let realm = try! Realm(configuration: config)
+        
+        // Analyze the files and produce a Realm-compatible schema
+        let generator =  ImportSchemaGenerator(files: csvFiles)
+        let schema = try! generator.generate()
+        
+        // Use the schema and files to create the Realm file, and import the data
+        let dataImporter = CSVDataImporter(files: csvFiles)
+        try! dataImporter.importToPath(databaseRestorePath as String, schema: schema)
+    }
 }
