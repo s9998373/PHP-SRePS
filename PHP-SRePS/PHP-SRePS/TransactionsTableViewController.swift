@@ -41,6 +41,7 @@ class TransactionsTableViewController: UITableViewController {
     
     /// Backs the current database up and offers the ability to share it with system applications.
     func exportToCSV(){
+        /*
         let backupLocation = SalesDataSource.sharedManager.exportToCSV()
         print("Saved backup to \(backupLocation)")
         
@@ -50,6 +51,7 @@ class TransactionsTableViewController: UITableViewController {
             activityVC.popoverPresentationController?.sourceView = self.view
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
+        */
     }
     
     /// Presents the new transation controller.

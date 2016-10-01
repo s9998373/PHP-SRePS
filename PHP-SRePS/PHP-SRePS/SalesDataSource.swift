@@ -8,8 +8,6 @@
 
 import Foundation
 import RealmSwift
-import RealmConverter
-import ZipArchive
 
 extension Results {
     
@@ -227,6 +225,7 @@ class SalesDataSource: NSObject {
         self.realm = try! Realm();
     }
     
+    /*
     /// Exports the database to CSV and returns the path where the zipped backup was saved.
     ///
     /// - returns: The path of the backup.
@@ -332,7 +331,9 @@ class SalesDataSource: NSObject {
         
         return zipSavePath
     }
+     */
     
+    /*
     func importFromPath(path: String){
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         
@@ -390,4 +391,5 @@ class SalesDataSource: NSObject {
         let dataImporter = CSVDataImporter(files: csvFiles)
         try! dataImporter.importToPath(databaseRestorePath as String, schema: schema)
     }
+     */
 }
