@@ -392,4 +392,61 @@ class SalesDataSource: NSObject {
         try! dataImporter.importToPath(databaseRestorePath as String, schema: schema)
     }
      */
+    
+    static func saveDataInExportDirectory(filename: String, data: NSData) -> String{
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
+        let zipOutputFolderPath = documentsPath.stringByAppendingPathComponent("Exports") as NSString
+        
+        let savefilePath = zipOutputFolderPath.stringByAppendingPathComponent(filename)
+        
+        var needsToCreateBackupDirectory = false
+        
+        var isDirectory:ObjCBool = false
+        
+        let fileManager = NSFileManager.defaultManager()
+        
+        // Determine if we need to create the backup directory.
+        if (!fileManager.fileExistsAtPath(zipOutputFolderPath as String, isDirectory: &isDirectory) || !isDirectory) {
+            needsToCreateBackupDirectory = true
+        }
+        
+        // Create the output directory, also create a copy of the Realm database.
+        do {
+            if needsToCreateBackupDirectory {
+                print("[*] Creating export directory...")
+                try fileManager.createDirectoryAtPath(zipOutputFolderPath as String, withIntermediateDirectories: true, attributes: nil)
+            }
+            
+            // Write the file
+            try data.writeToFile(savefilePath, options: NSDataWritingOptions.AtomicWrite)
+        }catch let error as NSError{
+            print(error.localizedDescription)
+            return ""
+        }
+        
+        
+        return savefilePath
+    }
+    
+    func createCSVUsingTransactions(transactions : NSArray) -> String{
+        let sortDescriptor = NSSortDescriptor.init(key: "date", ascending: true)
+        let sortedArray = transactions.sortedArrayUsingDescriptors([sortDescriptor]) as! [Transaction]
+        var csvString = "date,item_count,total_cost\n"
+        
+        for transaction in sortedArray{
+            let dateString = DataAdapters.dateTimeFormatterStandard().stringFromDate(transaction.date!)
+            let itemCount = transaction.numberOfItems()
+            let totalCost = (transaction.totalCost!).stringByReplacingOccurrencesOfString(",", withString: "")
+            csvString = csvString.stringByAppendingString("\(dateString),\(itemCount),\(totalCost)")
+            if (sortedArray.last != transaction) {
+                csvString = csvString.stringByAppendingString("\n")
+            }
+        }
+        
+        let dateTimeString = DataAdapters.dateTimeFormatter().stringFromDate(NSDate())
+        let saveFilename = "backup-export-\(dateTimeString).csv"
+        let saveData = csvString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        return SalesDataSource.saveDataInExportDirectory(saveFilename, data: saveData!)
+    }
 }

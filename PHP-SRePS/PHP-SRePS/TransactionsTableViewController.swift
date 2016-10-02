@@ -27,7 +27,7 @@ class TransactionsTableViewController: UITableViewController {
             let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TransactionsTableViewController.addSaleItem));
             self.navigationItem.rightBarButtonItem = addButtonItem;
             
-            let exportButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: #selector(TransactionsTableViewController.exportToCSV));
+            let exportButtonItem = UIBarButtonItem.init(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TransactionsTableViewController.exportToCSV));
             self.navigationItem.leftBarButtonItem = exportButtonItem;
         }
         self.tableView.rowHeight = 56
@@ -52,6 +52,14 @@ class TransactionsTableViewController: UITableViewController {
             self.presentViewController(activityVC, animated: true, completion: nil)
         }
         */
+        
+        let csvString = SalesDataSource.sharedManager.createCSVUsingTransactions(transactionList)
+        print(csvString)
+        
+        let exportPathURL = NSURL.fileURLWithPath(csvString)
+        let activityVC = UIActivityViewController(activityItems: [exportPathURL], applicationActivities: nil)
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.presentViewController(activityVC, animated: true, completion: nil)
     }
     
     /// Presents the new transation controller.

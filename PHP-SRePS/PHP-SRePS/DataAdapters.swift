@@ -44,6 +44,22 @@ class DataAdapters {
         return Singleton.instance
     }
     
+    /// A date and time formatter yyyy-MM-dd HHmmss
+    ///
+    /// - returns: The configured date formatter.
+    static func dateTimeFormatterStandard() -> NSDateFormatter{
+        struct Singleton {
+            static let instance = NSDateFormatter()
+            static let initialised = false;
+        }
+        
+        if (!Singleton.initialised) {
+            Singleton.instance.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        }
+        
+        return Singleton.instance
+    }
+    
     /// A number formatter, for currency style numbers.
     ///
     /// - returns: The configured number formatter.
