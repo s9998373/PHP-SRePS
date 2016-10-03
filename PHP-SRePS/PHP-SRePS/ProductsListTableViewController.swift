@@ -116,6 +116,28 @@ class ProductsListTableViewController: UITableViewController {
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let selectedProduct:Product = SalesDataSource.sharedManager.allProducts().objectAtIndex(indexPath.row) as! Product
+            let salesEntries = SalesDataSource.sharedManager.allSalesEntries() as! [SalesEntry]
+            var canBeDeleted = true
+            for salesEntry in salesEntries{
+                if salesEntry.product == selectedProduct {
+                    canBeDeleted = false
+                }
+            }
+            
+            if canBeDeleted {
+                SalesDataSource.sharedManager.removeSalesProduct(selectedProduct)
+                reloadData()
+            }else{
+                let alert = UIAlertController.init(title: "Error", message: "This product cannot be deleted as it is referenced in other transactions. Remove all transactions referencing this product and then try again.", preferredStyle: UIAlertControllerStyle.Alert);
+                alert.addAction(UIAlertAction.init(title: "OK", style: UIAlertActionStyle.Default, handler: nil));
+                self.presentViewController(alert, animated: true, completion: nil);
+            }
+        }
+    }
+    
 }
 
 extension ProductsListTableViewController : UITextFieldDelegate{

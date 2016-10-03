@@ -36,7 +36,8 @@ class TransactionsTableViewController: UITableViewController {
     /// Refreshes the data and table.
     func refreshData(){
         transactionList = SalesDataSource.sharedManager.allTransactions()
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
+        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
     }
     
     /// Backs the current database up and offers the ability to share it with system applications.
@@ -103,6 +104,23 @@ class TransactionsTableViewController: UITableViewController {
 
         return cell!
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let transaction:Transaction = transactionList[indexPath.row] as! Transaction
+        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("AddTransactionTableViewController") as! AddTransactionTableViewController;
+        controller.delegate = self
+        controller.currentTransaction = transaction
+        let nav = UINavigationController.init(rootViewController: controller);
+        self.presentViewController(nav, animated: true, completion: nil);
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let transaction:Transaction = transactionList[indexPath.row] as! Transaction
+            SalesDataSource.sharedManager.removeTransaction(transaction)
+            refreshData()
+        }
+    }
 
 }
 
@@ -113,10 +131,14 @@ extension TransactionsTableViewController : AddTransactionTableViewControllerDel
     /// - parameter sender:      The view controller that added the transaction.
     /// - parameter transaction: The new transation.
     func didAddTransaction(sender: AddTransactionTableViewController, transaction: Transaction?) {
-        if (transaction != nil && transaction!.numberOfItems() > 0) {
+        if (transaction != nil) {
             SalesDataSource.sharedManager.addTransaction(transaction!)
             refreshData()
         }
         sender.dismissViewControllerAnimated(true, completion: nil);
+    }
+    
+    func didModifyTransaction(sender: AddTransactionTableViewController, transaction: Transaction?){
+        didAddTransaction(sender, transaction: transaction)
     }
 }

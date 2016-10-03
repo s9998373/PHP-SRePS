@@ -10,11 +10,13 @@ import UIKit
 
 protocol AddTransactionTableViewControllerDelegate: class {
     func didAddTransaction(sender: AddTransactionTableViewController, transaction: Transaction?)
+    func didModifyTransaction(sender: AddTransactionTableViewController, transaction: Transaction?)
 }
 
 class AddTransactionTableViewController: UITableViewController {
     weak var delegate: AddTransactionTableViewControllerDelegate!;
     var currentTransaction : Transaction!;
+    var newTransaction:Bool = false
     let kCellIdentifier = "SalesEntryCellIdentifier";
 
     override func viewDidLoad() {
@@ -55,7 +57,11 @@ class AddTransactionTableViewController: UITableViewController {
     
     /// Handle when the use taps done.
     func doneAction(){
-        self.delegate.didAddTransaction(self, transaction: currentTransaction)
+        if newTransaction {
+            self.delegate.didAddTransaction(self, transaction: currentTransaction)
+        }else{
+            self.delegate.didModifyTransaction(self, transaction: currentTransaction)
+        }
     }
     
     /// Handles the user selecting a product in the product selection controller.
@@ -66,6 +72,9 @@ class AddTransactionTableViewController: UITableViewController {
         print("Selected ", selectedQuantity, " of ", selectedProduct.name, ".");
         if (currentTransaction == nil) {
             currentTransaction = Transaction(date: NSDate());
+            newTransaction = true
+        }else{
+            newTransaction = false
         }
         
         let salesEntry = SalesEntry(product: selectedProduct, quanity: selectedQuantity);
@@ -140,6 +149,14 @@ class AddTransactionTableViewController: UITableViewController {
         cell!.detailTextLabel!.text = String(currentItem.quantity!)
 
         return cell!
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let salesEntry = currentTransaction.salesEntryAtIndex(indexPath.row)
+            currentTransaction.removeSalesEntry(salesEntry)
+            reloadData()
+        }
     }
 
 }

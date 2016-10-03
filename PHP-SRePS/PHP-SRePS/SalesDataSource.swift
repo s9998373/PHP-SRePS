@@ -106,6 +106,14 @@ class SalesDataSource: NSObject {
         return result;
     }
     
+    /// Returns all sales entries contained within the database.
+    ///
+    /// - returns: An array of all of the sales entries.
+    func allSalesEntries() -> NSArray{
+        let result = realm.objects(SalesEntry).toNSArray();
+        return result;
+    }
+    
     /// Returns all transactions contained within the database during a given month and year.
     ///
     /// - parameter month: The month where transactions were made.
