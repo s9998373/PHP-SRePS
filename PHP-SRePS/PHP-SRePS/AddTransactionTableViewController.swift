@@ -154,7 +154,7 @@ class AddTransactionTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let salesEntry = currentTransaction.salesEntryAtIndex(indexPath.row)
-            currentTransaction.removeSalesEntry(salesEntry)
+            print("Remove entry: \(currentTransaction.removeSalesEntry(salesEntry))")
             reloadData()
         }
     }

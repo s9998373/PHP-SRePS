@@ -118,11 +118,13 @@ class ProductsListTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let selectedProduct:Product = SalesDataSource.sharedManager.allProducts().objectAtIndex(indexPath.row) as! Product
+            let selectedProduct:Product = productList.objectAtIndex(indexPath.row) as! Product
             let salesEntries = SalesDataSource.sharedManager.allSalesEntries() as! [SalesEntry]
             var canBeDeleted = true
+            print("Deleting \(selectedProduct.name)")
             for salesEntry in salesEntries{
-                if salesEntry.product == selectedProduct {
+                print("Comparing \(salesEntry.product!.name)")
+                if salesEntry.product!.getIdentifier() == selectedProduct.getIdentifier() {
                     canBeDeleted = false
                 }
             }

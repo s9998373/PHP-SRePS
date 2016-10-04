@@ -26,11 +26,17 @@ class TransactionsTableViewController: UITableViewController {
             
             let addButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(TransactionsTableViewController.addSaleItem));
             self.navigationItem.rightBarButtonItem = addButtonItem;
-            
-            let exportButtonItem = UIBarButtonItem.init(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TransactionsTableViewController.exportToCSV));
-            self.navigationItem.leftBarButtonItem = exportButtonItem;
         }
+        
+        let exportButtonItem = UIBarButtonItem.init(title: "Export", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(TransactionsTableViewController.exportToCSV));
+        self.navigationItem.leftBarButtonItem = exportButtonItem;
+        
         self.tableView.rowHeight = 56
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshData()
     }
     
     /// Refreshes the data and table.

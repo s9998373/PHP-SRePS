@@ -12,12 +12,19 @@ class ReportsTimeframeSelectorTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let exportButtonItem = UIBarButtonItem.init(title: "Demo Data", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ReportsTimeframeSelectorTableViewController.prefillDatabase));
+        self.navigationItem.leftBarButtonItem = exportButtonItem;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    func prefillDatabase(){
+        SalesDataSource.sharedManager.prefillDatabase(10)
     }
 
     override func didReceiveMemoryWarning() {

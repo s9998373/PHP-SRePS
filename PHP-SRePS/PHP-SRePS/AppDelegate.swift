@@ -19,28 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         print("Running from " + NSBundle.mainBundle().bundlePath);
         
-        let deleteEverything = false
-//        let deleteEverything = true
-        if (deleteEverything == true) {
-            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-            let docNS = documentsPath as NSString
-            
-            let dbP1 = docNS.stringByAppendingString("default.realm")
-            let dbP2 = docNS.stringByAppendingString("default.realm.lock")
-            let dbP3 = docNS.stringByAppendingString("default.realm.note")
-            let dbP4 = docNS.stringByAppendingString("default.realm.management")
-            
-            do{
-                try NSFileManager.defaultManager().removeItemAtPath(dbP1)
-                try NSFileManager.defaultManager().removeItemAtPath(dbP2)
-                try NSFileManager.defaultManager().removeItemAtPath(dbP3)
-                try NSFileManager.defaultManager().removeItemAtPath(dbP4)}
-            catch let error as NSError {
-                print("Ooops! Something went wrong: \(error)")
-            }
-            exit(0)
-        }
-        
         // Override point for customization after application launch.
         return true
     }

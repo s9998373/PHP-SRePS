@@ -159,7 +159,6 @@
 				33046CE41D6329F000CEEDAA /* AddTransactionTableViewController.swift */,
 				33046CE21D631EE500CEEDAA /* AddProductTableViewController.swift */,
 				33046CE61D632A2400CEEDAA /* ProductsListTableViewController.swift */,
-				33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */,
 				BF002B031D9145B80016F7AE /* CalendarTimeframeSelectorReportViewController.swift */,
 				BF002B051D914CBA0016F7AE /* CustomTimeframeSelectorReportViewController.swift */,
 				BF002B071D914D170016F7AE /* ReportsTimeframeSelectorTableViewController.swift */,
@@ -195,6 +194,7 @@
 		338E6FDF1D632F89009C42E5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				33046CDC1D6316D000CEEDAA /* SalesDataSource.swift */,
 				BF002B011D90E7480016F7AE /* DataAdapters.swift */,
 				33046CDE1D63177900CEEDAA /* Product.swift */,
 				33046CE01D63189400CEEDAA /* Transaction.swift */,
@@ -513,6 +513,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = WVW2QXS9H2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PHP-SRePS/Frameworks",
@@ -535,6 +536,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = WVW2QXS9H2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PHP-SRePS/Frameworks",

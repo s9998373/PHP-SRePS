@@ -77,14 +77,20 @@ class Transaction: Object {
     /// Removes a SalesEntry from the transation.
     ///
     /// - parameter salesEntry: The SalesEntry to be removed.
-    func removeSalesEntry(salesEntry: SalesEntry){
+    func removeSalesEntry(salesEntry: SalesEntry) -> Bool{
+        var result = true
         let idx = indexOfProduct(salesEntry.product!)
         if idx != NSNotFound {
             SalesDataSource.openWrite()
+            let entryToDelete = items[idx]
             items.removeAtIndex(idx)
             salesEntriesChanged()
+            SalesDataSource.sharedManager.realm.delete(entryToDelete)
             SalesDataSource.closeWrite()
+        }else{
+            result = false
         }
+        return result
     }
     
     /// Merges two SalesEntries.

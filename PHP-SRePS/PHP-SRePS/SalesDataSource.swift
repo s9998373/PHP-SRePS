@@ -233,6 +233,12 @@ class SalesDataSource: NSObject {
         self.realm = try! Realm();
     }
     
+    func resetDatabase(){
+        SalesDataSource.openWrite()
+        realm.deleteAll()
+        SalesDataSource.closeWrite()
+    }
+    
     /*
     /// Exports the database to CSV and returns the path where the zipped backup was saved.
     ///
@@ -401,6 +407,13 @@ class SalesDataSource: NSObject {
     }
      */
     
+    /// Saves data into the Exports directory contained within the Documents directory.
+    /// If this directory does not exist it is created.
+    ///
+    /// - parameter filename: The name of the file that is to be saved.
+    /// - parameter data:     The data to be saved (NSData).
+    ///
+    /// - returns: <#return value description#>
     static func saveDataInExportDirectory(filename: String, data: NSData) -> String{
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString
         let zipOutputFolderPath = documentsPath.stringByAppendingPathComponent("Exports") as NSString
@@ -436,6 +449,11 @@ class SalesDataSource: NSObject {
         return savefilePath
     }
     
+    /// Creates a CSV from the passed transactions.
+    ///
+    /// - parameter transactions: An NSArray of Transactions.
+    ///
+    /// - returns: A string representing the location that the CSV file has been saved to.
     func createCSVUsingTransactions(transactions : NSArray) -> String{
         let sortDescriptor = NSSortDescriptor.init(key: "date", ascending: true)
         let sortedArray = transactions.sortedArrayUsingDescriptors([sortDescriptor]) as! [Transaction]
@@ -456,5 +474,49 @@ class SalesDataSource: NSObject {
         let saveData = csvString.dataUsingEncoding(NSUTF8StringEncoding)
         
         return SalesDataSource.saveDataInExportDirectory(saveFilename, data: saveData!)
+    }
+    
+    /// Fills the database with randomised sample data.
+    func prefillDatabase(numberOfTransactions : Int){
+//        let NUM_TRANSACTIONS = 2
+        
+        SalesDataSource.sharedManager.resetDatabase()
+        
+        var products = [Product?](count: 10, repeatedValue: nil)
+        
+        products[0] = Product.init(aName: "Lipitor", aPrice: "9.45");
+        products[1] = Product.init(aName: "Nexium", aPrice: "18.42");
+        products[2] = Product.init(aName: "Plavix", aPrice: "29.08");
+        products[3] = Product.init(aName: "Abilify", aPrice: "25.3");
+        products[4] = Product.init(aName: "Advair Diskus", aPrice: "16.95");
+        products[5] = Product.init(aName: "Seroquel", aPrice: "29.26");
+        products[6] = Product.init(aName: "Singulair", aPrice: "22.49");
+        products[7] = Product.init(aName: "Crestor", aPrice: "20.06");
+        products[8] = Product.init(aName: "Actos", aPrice: "29.29");
+        products[9] = Product.init(aName: "Epogen", aPrice: "7.39");
+        
+        for product in products {
+            SalesDataSource.sharedManager.addSalesProduct(product!)
+        }
+        
+        for i in 0..<numberOfTransactions {
+            let salesEntryCount = arc4random_uniform(5) + 1
+            var availableProducts = Array(0...9)
+            var selectedProductIndexes = [Int]()
+            print("\(i) pass...")
+            let transaction = Transaction.init(date: NSDate())
+            for _ in 0..<salesEntryCount{
+                let index = Int(arc4random_uniform(UInt32(availableProducts.count)))
+                selectedProductIndexes.append(availableProducts[index])
+                let product = products[availableProducts[index]]
+                let quantity = Int(arc4random_uniform(8)) + 1
+                let salesEntry = SalesEntry.init(product: product!, quanity: quantity)
+                transaction.addSalesEntry(salesEntry)
+                
+                print(products[availableProducts[index]]!.name)
+                availableProducts.removeAtIndex(index)
+            }
+            SalesDataSource.sharedManager.addTransaction(transaction)
+        }
     }
 }

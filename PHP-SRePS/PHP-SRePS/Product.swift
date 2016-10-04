@@ -39,4 +39,8 @@ public class Product: Object {
         let ret = DataAdapters.numberFormatter().stringFromNumber(self.price)!
         return ret
     }
+    
+    func getIdentifier() -> String{
+        return "\(name)-\(_price)"
+    }
 }
