@@ -24,7 +24,7 @@ class ReportsTimeframeSelectorTableViewController: UITableViewController {
     }
     
     func prefillDatabase(){
-        SalesDataSource.sharedManager.prefillDatabase(10)
+        SalesDataSource.sharedManager.prefillDatabase(1000000)
     }
 
     override func didReceiveMemoryWarning() {

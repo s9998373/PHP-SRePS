@@ -28,10 +28,20 @@ class Transaction: Object {
     ///
     /// - parameter salesEntry: The SalesEntry to be added.
     func addSalesEntry(salesEntry: SalesEntry){
-        SalesDataSource.openWrite()
+        addSalesEntry(salesEntry, write: true)
+    }
+    
+    func addSalesEntry(salesEntry: SalesEntry, write: Bool){
+//        if write {
+//            SalesDataSource.openWrite()
+//        }
+        
         self.items.append(salesEntry)
         salesEntriesChanged()
-        SalesDataSource.closeWrite()
+        
+//        if write {
+//            SalesDataSource.closeWrite()
+//        }
     }
     
     /// A readable string representation of the transaction.
@@ -181,7 +191,7 @@ class Transaction: Object {
     func calculateTotal(){
         var total = NSDecimalNumber.init(long: 0)
         for entry in items{
-            print("Decimal", entry.decimalCost())
+//            print("Decimal", entry.decimalCost())
             total = total.decimalNumberByAdding(entry.decimalCost())
         }
         totalCost = DataAdapters.numberFormatter().stringFromNumber(total)

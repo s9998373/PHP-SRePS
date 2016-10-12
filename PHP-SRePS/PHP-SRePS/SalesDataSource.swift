@@ -95,7 +95,17 @@ class SalesDataSource: NSObject {
     ///
     /// - returns: True if the operation was successful, otherwise, false.
     func addTransaction(item: Transaction) -> Bool{
-        return abstractAdd(item);
+        return addTransaction(item, write: true)
+    }
+    
+    
+    /// Adds a transation to the database.
+    ///
+    /// - parameter item: The transaction to be added.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
+    func addTransaction(item: Transaction, write: Bool) -> Bool{
+        return abstractAdd(item, write: write);
     }
     
     /// Returns all transactions contained within the database.
@@ -191,9 +201,25 @@ class SalesDataSource: NSObject {
     ///
     /// - returns: True if the operation was successful, otherwise, false.
     private func abstractAdd(item: Object) -> Bool{
-        SalesDataSource.openWrite();
+        return abstractAdd(item, write: true)
+    }
+    
+    
+    /// Abstract method to add an item to the database.
+    ///
+    /// - parameter item: The item to be added.
+    ///
+    /// - returns: True if the operation was successful, otherwise, false.
+    private func abstractAdd(item: Object, write: Bool) -> Bool{
+        if write {
+            SalesDataSource.openWrite();
+        }
         self.realm.add(item);
-        return SalesDataSource.closeWrite();
+        if write {
+            return SalesDataSource.closeWrite();
+        }else{
+            return true
+        }
     }
     
     
@@ -499,11 +525,12 @@ class SalesDataSource: NSObject {
             SalesDataSource.sharedManager.addSalesProduct(product!)
         }
         
+        SalesDataSource.openWrite()
         for i in 0..<numberOfTransactions {
             let salesEntryCount = arc4random_uniform(5) + 1
             var availableProducts = Array(0...9)
             var selectedProductIndexes = [Int]()
-            print("\(i) pass...")
+//            print("\(i) pass...")
             let transaction = Transaction.init(date: NSDate())
             for _ in 0..<salesEntryCount{
                 let index = Int(arc4random_uniform(UInt32(availableProducts.count)))
@@ -511,12 +538,17 @@ class SalesDataSource: NSObject {
                 let product = products[availableProducts[index]]
                 let quantity = Int(arc4random_uniform(8)) + 1
                 let salesEntry = SalesEntry.init(product: product!, quanity: quantity)
-                transaction.addSalesEntry(salesEntry)
+                transaction.addSalesEntry(salesEntry, write: false)
                 
-                print(products[availableProducts[index]]!.name)
+//                print(products[availableProducts[index]]!.name)
                 availableProducts.removeAtIndex(index)
             }
-            SalesDataSource.sharedManager.addTransaction(transaction)
+            SalesDataSource.sharedManager.addTransaction(transaction, write: false)
+            
+            if (i % 100 == 0) {
+                print(i)
+            }
         }
+        SalesDataSource.closeWrite()
     }
 }
